@@ -1,0 +1,76 @@
+<!-- ADD CSS!! template online OR look at Bulma documentation -->
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class = "columns">
+    <div class = "column is-1">
+    
+    </div>
+    <div class = "column">
+        <p class = "is-size-2 is-bold has-text-grey-dark" > {{ profile.user.username }} </p>
+        <span class = "is-small has-text-grey-light">
+            Number of kills: {{ user.profile.killCount }}
+        </span>
+    
+        <div class = "column">
+            <form method = "post"> <!-- to send data via this form -->
+                {% csrf_token %} <!-- security token to allow users to safely submit forms -->
+                <div class="buttons has-addons">
+                    {% if profile in user.profile.follows.all %} <!-- greys out follow button if already following -->
+                        <button class="button is-success is-static is-small">Follow</button>
+                        <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
+                        <!-- name is the key used to access the value, and the value is what is sent to the view -->
+                    {% else %} 
+                        <button class="button is-dark is-small" name="follow" value="follow">Follow</button>
+                        <button class="button is-static is-small">Unfollow</button>
+                {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <div class = "column">
+            <div class = "content"> <!-- showing all kills -->
+                {% for kill in profile.user.kills.all %} 
+                    <div class = "box">
+                        {{ kill.caption }}
+                        <span class = "is-small has-text-grey-light">
+                            ({{ kill.posted_time }})
+                        </span>
+                        <img src="{{ kill.image }}" width = '300'/>  
+                    </div>
+                {% endfor %}
+                {% if profile.user.killCount == 0 %}
+                    <span class = "is-small is-italic is-grey-dark">
+                        Sorry, no posts yet!
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class = "column">
+    
+        <div class = "column">
+            <div class = "column">
+                <p class = "is-size-4"> Following: </p>
+                {% for following in profile.follows.all %}
+                        <li> {{ following.user.username }} </li>
+                {% endfor %}
+
+                <p class = "is-size-4"> Followed By: </p>
+                {% for user1 in users %}
+                    {% if profile.user in user1.follows.all %} 
+                    <li> {{ user1.user.username }} </li>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div> 
+    </div>
+    <div class = "column is-1">
+    
+    </div>
+</div>
+
+{% endblock content %}

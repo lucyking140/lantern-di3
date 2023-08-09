@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block title %} Login {% endblock %} 
+
+{% block content %}
+
+   <div class = "box is-narrow">
+    <div class = "column is-half is-centered">
+        <h2> Log In </h2>
+    </div>
+    <div class = "column is-half is-centered">
+        <form method = "post" >
+            {% csrf_token %} 
+            {{ form.as_p }}
+            <button type = "submit"> Log In </button>
+        </form>
+    </div>
+   </div> 
+
+{% endblock %}

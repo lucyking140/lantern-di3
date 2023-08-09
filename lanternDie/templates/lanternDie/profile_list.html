@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class = "column">
+    
+    {% for profile in profiles %}
+
+    <div class = "block">
+        <div class="card">
+            <a href="{% url 'lanternDie:profile' profile.id %}"> <!-- links to the path call for 'profile' and passes the corresponding ID-->
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                            <figure class = "image is-48x48">
+                                <img src="https://bulma.io/images/placeholders/96x96.png"
+                                     alt="Placeholder image"> <!-- CHANGE THIS!! -->
+                            </figure>
+                        </div>
+                    
+                        <div class="media-content">
+                            <p class="title is-4">{{ profile.user.username }}</p> <!-- FIGURE OUT HOW TO MAKE THIS FIRST NAME!! -->
+                            <p class="subtitle is-6">@{{ profile.user.username}}</p> <!-- template filter to display username in all lowercase -->
+                        </div>
+                    </div>
+                   
+                </div>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock content %}

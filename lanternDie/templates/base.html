@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content = "IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href = "{% static 'css/mystyles.css' %}" >
+    <!-- href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css" -->
+    <title> Lantern Die! </title>
+    <!-- https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css -->
+</head>
+<body>
+    <section class = "hero has-background-danger">
+        <section class="hero is-small mb-4">
+            
+            <div class = "column">
+
+            </div>
+            <nav class="level"> <!-- Top bar with links -->
+                {% if user.is_authenticated %}
+                    <p class="level-item has-text-centered">
+                        <a href="{% url 'lanternDie:profile_list' %}" >
+                            <button class = "button is-small is-outlined is-one-third">
+                                All Profiles
+                            </button>
+                        </a>
+                    </p>
+                    <p class="level-item has-text-centered">
+                        <a href="{% url 'lanternDie:profile' request.user.profile.id %}">
+                            <button class = "button is-small is-outlined is-one-third">
+                                Your Profile
+                            </button>
+                        </a>
+                    </p>
+                {% endif %}
+                <div class = "column">
+                    <p class="level-item has-text-centered">
+                        <h1 class="title is-5 has-text-white"> 
+                            Lantern Die 
+                        </h1>
+                    </p>
+                </div>
+                {% if user.is_authenticated %}
+                    <p class="level-item has-text-centered">
+                        <a href = "{% url 'logout' %}">
+                            <button class = "button is-small is-outlined is-one-third">
+                                Log Out
+                            </button>
+                        </a>
+                    </p>
+                    <p class="level-item has-text-centered">
+                        <a href = "{% url 'lanternDie:dashboard' %}">
+                            <button class = "button is-small is-outlined is-one-third">
+                                Return to Dashboard
+                            </button>
+                        </a>
+                    </p>
+                {% endif %}
+            </nav>
+
+        </section>
+        <!-- <div class = "container.is-widescreen"> -->
+            <!-- <div class = "columns"> -->
+        {% block content %} <!--this is where the child templates are implemented -->
+        {% endblock content %}
+
+        <span class="icon is-large">
+            <i class="fas fa-home"></i>
+          </span>
+    </section>
+</body>
+</html>

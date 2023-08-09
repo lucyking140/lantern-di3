@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <!-- 
+    <div class = "columns"> the buttons
+        <div class = "column"> button to access profile list
+            <a href="{% url 'lanternDie:profile_list' %}" >
+                <button class = "button is-default is-outlined is-one-third">
+                    All Profiles
+                </button>
+            </a>
+        </div>
+        <div class = "column"> button to access user's profile
+            <a href="{% url 'lanternDie:profile' request.user.profile.id %}">
+                <button class = "button is-default is-outlined is-one-third">
+                    Your Profile
+                </button>
+            </a>
+        </div>
+        <div class = "column" >
+            <a href = "{% url 'logout' %}">
+                    <button class = "button is-default is-outlined is-one-third">
+                        Log Out
+                    </button>
+            </a>
+        </div>
+    </div>
+-->
+    <div class="columns"> <!-- posts -->
+        <div class = "column is-one-third">
+
+        </div>
+        <div class = "column">
+            {% for followed in user.profile.follows.all %}
+                {% for kill in followed.user.kills.all %} <!-- each post -->
+                    <div class="column is-offset-one-quarter is-half has-background-danger-light ">
+                        <span class = "is-small has-text-black is-9">
+                            {{ kill.user.username }}
+                        </span>
+                        <span class="is-small has-text-grey-light">
+                            ({{ kill.posted_time }})
+                        </span>
+                        <div class = "block is-small has-text-black is-6">
+                            {{ kill.caption }}
+                        </div> 
+                        <img class = "box" src = "{{ kill.image }}" width = '300' />
+                    </div> 
+                    <div class = "column">
+                    
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+    
+
+<!-- this is going to go away
+    <div class = "columns is-one-third is-vcentered"> posting and accessing other links
+        <div class = "columns is-vcentered">
+            
+        </div>
+        <div class = "column">
+            <div class="column">
+                <h2 class="title is-6">Document a Kill!</p>
+            </div>
+            <div class="block">
+                <form method = "post" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    {{ form.as_p }}
+                    <button class = "button is-grey-dark is-fullwidth" type = "submit"> 
+                        Document your kill
+                    </button>
+                </form>
+            </div>
+        </div>
+            
+    </div>
+-->
+
+{% else %}
+<div class = "columns is-centered">
+    
+    <div class = "column is-narrow is-centered has-background-danger-light">
+        <p class = "content is-size-4">You are not logged in.</p>
+        <a href="{% url 'login' %}">
+            <button class = "button is-small is-outlined is-one-third">
+                Log In
+            </button>
+        </a>
+        <a href="{% url 'lanternDie:registration' %}">
+            <button class = "button is-small is-outlined is-one-third">
+                Sign Up
+            </button>
+        </a>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock content %}

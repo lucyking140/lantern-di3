@@ -33,10 +33,4 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-'''
-You can now perform CRUD operations on the Todo model. The router class allows you to make the following queries:
-
-/todos/ - returns a list of all the Todo items. CREATE and READ operations can be performed here.
-/todos/id - returns a single Todo item using the id primary key. UPDATE and DELETE operations can be performed here.
-'''
+urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT) 

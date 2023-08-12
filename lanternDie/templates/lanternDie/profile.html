@@ -37,7 +37,7 @@
                         <span class = "is-small has-text-grey-light">
                             ({{ kill.posted_time }})
                         </span>
-                        <img src="{{ kill.image }}" width = '300'/>  
+                        <img src="{{ kill.image.url }}" width = '300'/>  
                     </div>
                 {% endfor %}
                 {% if profile.user.killCount == 0 %}

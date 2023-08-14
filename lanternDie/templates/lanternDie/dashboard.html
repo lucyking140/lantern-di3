@@ -4,49 +4,52 @@
 
 {% if user.is_authenticated %}
 
-    <!-- 
-    <div class = "columns"> the buttons
-        <div class = "column"> button to access profile list
-            <a href="{% url 'lanternDie:profile_list' %}" >
-                <button class = "button is-default is-outlined is-one-third">
-                    All Profiles
-                </button>
-            </a>
-        </div>
-        <div class = "column"> button to access user's profile
-            <a href="{% url 'lanternDie:profile' request.user.profile.id %}">
-                <button class = "button is-default is-outlined is-one-third">
-                    Your Profile
-                </button>
-            </a>
-        </div>
-        <div class = "column" >
-            <a href = "{% url 'logout' %}">
-                    <button class = "button is-default is-outlined is-one-third">
-                        Log Out
-                    </button>
-            </a>
-        </div>
+    {% load static %}
+
+    <div class = "column">
+            
     </div>
--->
-    <div class="columns"> <!-- posts -->
+    <div class = "columns">
         <div class = "column is-one-third">
 
         </div>
+        <h1 class = "title is-1 has-text-danger"> Welcome Back! </h1>
+    </div>
+    <div class="columns"> <!-- posts -->
         <div class = "column">
             {% for followed in user.profile.follows.all %}
                 {% for kill in followed.user.kills.all %} <!-- each post -->
-                    <div class="column is-offset-one-quarter is-half has-background-danger-light ">
-                        <span class = "is-small has-text-black is-9">
-                            {{ kill.user.username }}
-                        </span>
-                        <span class="is-small has-text-grey-light">
-                            ({{ kill.posted_time }})
-                        </span>
-                        <div class = "block is-small has-text-black is-6">
-                            {{ kill.caption }}
-                        </div> 
-                        <img class = "box" src = "{{ kill.image }}" width = '300' />
+                    <div class="column has-shadow is-offset-one-quarter is-half has-background-success">
+                        <div class = "column">
+
+                        </div>
+                        <div class = "columns">
+                            <div class="media-left">
+                                <figure class = "image is-48x48">
+                                    <img class = "is-rounded" src = "{{ kill.user.profile.profPic.url }}">
+                                </figure>
+                            </div>
+                            <div class = "content">
+                                <h1 class = "is-size-4">
+                                   {{ kill.user.username }}
+                                </h1>
+                                <p class="is-size-12">
+                                    ({{ kill.posted_time }})
+                                </p>
+                                <div class = "column is-fullwidth has-background-white">
+                                    {{ kill.caption }}
+                                    <div class = "column">
+                                        <img class = "is-square" src = "{{ kill.image.url }}" width = '300' />
+                                    </div>
+                                    <div class = "column">
+
+                                    </div>
+                                </div>
+                                <div class = "column">
+
+                                </div>
+                            </div>
+                        </div>
                     </div> 
                     <div class = "column">
                     
@@ -55,48 +58,39 @@
             {% endfor %}
         </div>
     </div>
-    
 
-<!-- this is going to go away
-    <div class = "columns is-one-third is-vcentered"> posting and accessing other links
-        <div class = "columns is-vcentered">
-            
-        </div>
-        <div class = "column">
-            <div class="column">
-                <h2 class="title is-6">Document a Kill!</p>
-            </div>
-            <div class="block">
-                <form method = "post" enctype="multipart/form-data">
-                    {% csrf_token %} 
-                    {{ form.as_p }}
-                    <button class = "button is-grey-dark is-fullwidth" type = "submit"> 
-                        Document your kill
-                    </button>
-                </form>
-            </div>
-        </div>
-            
-    </div>
--->
+   <!-- <footer class="footer has-text-centered is-flex-align-items-flex-end mt-auto has-background-success">
+        <div class="icon-text">
+            <span class="icon has-text-info">
+              <i class="fas fa-info-circle"></i>
+            </span>
+            <span>Add a Kill</span>
+          </div>
+    </footer> -->
 
 {% else %}
-<div class = "columns is-centered">
-    
-    <div class = "column is-narrow is-centered has-background-danger-light">
-        <p class = "content is-size-4">You are not logged in.</p>
-        <a href="{% url 'login' %}">
-            <button class = "button is-small is-outlined is-one-third">
-                Log In
-            </button>
-        </a>
-        <a href="{% url 'lanternDie:registration' %}">
-            <button class = "button is-small is-outlined is-one-third">
-                Sign Up
-            </button>
-        </a>
+    <div class = "column">
+
     </div>
-</div>
+    <br>
+    <div class = "columns is-centered">
+        
+        <div class = "column is-narrow is-centered has-background-success">
+            <h1 class="title is-2"> Welcome to LanternDie! </h1>
+            <p class = "content is-size-4">You are not logged in.</p>
+            Log in or create an account to join your friends 
+            <br>
+            in the fight against invasive species!
+            <br>
+            <br>
+            <a class="button is-light" href = "{% url 'login' %}">
+                Log In
+            </a>
+            <a class="button is-light" href = "{% url 'lanternDie:registration' %}">
+                Create Account
+            </a>
+        </div>
+    </div>
 
 {% endif %}
 

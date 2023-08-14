@@ -63,8 +63,8 @@ print("base dir: ", str(BASE_DIR))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = "django-insecure-u3%w(irr39z7$yup#39=%-x@9w90v8kw=xdct&@8g3d-frm9c-"
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "django-insecure-u3%w(irr39z7$yup#39=%-x@9w90v8kw=xdct&@8g3d-frm9c-"
+#SECRET_KEY = os.environ.get('SECRET_KEY')
 #LINE ABOVE COMMENDED OUT FOR SECURITY
 
 # SECURITY WARNING: don't run with debug turned on in production!

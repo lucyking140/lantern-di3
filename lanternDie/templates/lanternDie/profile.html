@@ -8,39 +8,64 @@
     
     </div>
     <div class = "column">
-        <p class = "is-size-2 is-bold has-text-grey-dark" > {{ profile.user.username }} </p>
-        <span class = "is-small has-text-grey-light">
-            Number of kills: {{ user.profile.killCount }}
+        <div class = "columns">
+            <div class="media-left">
+                <div class = "column">
+
+                </div>
+                <figure class = "image is-48x48">
+                    <img class = "has-border-primary" src = "{{ profile.profPic.url }}">
+                </figure>
+            </div>
+            <div class = "column" style="position:relative">
+                <p class = "is-size-2 is-bold has-text-black" > {{ profile.user.username }} </p>
+            </div>
+
+        </div>
+        
+       
+        <span class = "is-small has-text-grey-dark">
+            <strong> Number of kills: {{ profile.killCount }} </strong>
         </span>
     
-        <div class = "column">
-            <form method = "post"> <!-- to send data via this form -->
-                {% csrf_token %} <!-- security token to allow users to safely submit forms -->
-                <div class="buttons has-addons">
-                    {% if profile in user.profile.follows.all %} <!-- greys out follow button if already following -->
-                        <button class="button is-success is-static is-small">Follow</button>
-                        <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
-                        <!-- name is the key used to access the value, and the value is what is sent to the view -->
-                    {% else %} 
-                        <button class="button is-dark is-small" name="follow" value="follow">Follow</button>
-                        <button class="button is-static is-small">Unfollow</button>
-                {% endif %}
-                </div>
-            </form>
-        </div>
+        {% if profile.user.username != user.username %}  
+            <div class = "column">
+                <form method = "post"> <!-- to send data via this form -->
+                    {% csrf_token %} <!-- security token to allow users to safely submit forms -->
+                    <div class="buttons has-addons">
+                        {% if profile in profile.user.follows.all %} <!-- greys out follow button if already following -->
+                            <button class="button is-success is-static is-small">Follow</button>
+                            <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
+                            <!-- name is the key used to access the value, and the value is what is sent to the view -->
+                        {% else %} 
+                            <button class="button is-dark is-small" name="follow" value="follow">Follow</button>
+                            <button class="button is-static is-small">Unfollow</button>
+                    {% endif %}
+                    </div>
+                </form>
+            </div>
+        {% endif %}
 
         <div class = "column">
-            <div class = "content"> <!-- showing all kills -->
-                {% for kill in profile.user.kills.all %} 
-                    <div class = "box">
-                        {{ kill.caption }}
-                        <span class = "is-small has-text-grey-light">
+
+        </div>
+
+        <div class="columns"> <!-- posts -->
+            <div class = "column">
+                {% for kill in profile.user.kills.all %}
+                    <div class="column has-shadow has-background-success">
+                        <div class = "block is-small has-text-black is-6">
+                            {{ kill.caption }}
+                        </div>
+                        <span class="is-8 has-text-grey-dark">
                             ({{ kill.posted_time }})
                         </span>
-                        <img src="{{ kill.image.url }}" width = '300'/>  
-                    </div>
+                        <div class = "column is-offset-one-quarter">
+                            <img class = "box" src = "{{ kill.image.url }}" width = '600' />
+                        </div>
+                    </div> 
                 {% endfor %}
-                {% if profile.user.killCount == 0 %}
+                {% if profile.killCount == 0 %}
                     <span class = "is-small is-italic is-grey-dark">
                         Sorry, no posts yet!
                     </span>
@@ -50,21 +75,30 @@
     
     </div>
     
-    <div class = "column">
+    <div class = "column is-one-quarter">
     
         <div class = "column">
+            {% if profile.user.username == user.username %}  
+                <div class = "column">
+                    <a class = "button is-light is-small" href="{% url 'lanternDie:changeProf' %}">
+                        Change Profile
+                    </a>
+                </div>
+            {% endif %}
             <div class = "column">
                 <p class = "is-size-4"> Following: </p>
-                {% for following in profile.follows.all %}
-                        <li> {{ following.user.username }} </li>
-                {% endfor %}
+                    {% for following in profile.follows.all %}
+                        {% if following.user.username != profile.user.username %}
+                            <li> {{ following.user.username }} </li>
+                        {% endif %}
+                    {% endfor %}
 
-                <p class = "is-size-4"> Followed By: </p>
-                {% for user1 in users %}
-                    {% if profile.user in user1.follows.all %} 
-                    <li> {{ user1.user.username }} </li>
-                    {% endif %}
-                {% endfor %}
+                    <p class = "is-size-4"> Followed By: </p>
+                    {% for user1 in users %}
+                        {% if profile.user in user1.follows.all %} 
+                        <li> {{ user1.user.username }} </li>
+                        {% endif %}
+                    {% endfor %}
             </div>
         </div> 
     </div>

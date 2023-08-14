@@ -3,13 +3,22 @@
 {% block title %} Login {% endblock %} 
 
 {% block content %}
+<div class = "column">
 
-<h2> Sign Up </h2>
-<form method = "post" >
-    {% csrf_token %} 
-    {{ form.as_p }}
-    <!-- this needs to be changed -->
-    <button type = "submit"> Create Account </button>
-    <input type = "submit" value = "Register">
-</form>
+</div>
+<br>
+<div class = "columns">
+    <div class = "column is-one-quarter">
+
+    </div>
+    <div class = "column is-half is-centered has-background-success">
+        <h1 class="title is-2"> Sign Up </h1>
+        <p class = "title is-6"> Welcome to LanternDie! </p>
+        <form method = "post" >
+            {% csrf_token %} 
+            {{ form.as_p }}
+            <input type = "submit" value = "Register">
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -3,18 +3,21 @@
 {% block title %} Login {% endblock %} 
 
 {% block content %}
+<div class = "column">
 
-   <div class = "box is-narrow">
-    <div class = "column is-half is-centered">
-        <h2> Log In </h2>
+</div>
+<br>
+<div class = "columns">
+    <div class = "column is-one-quarter">
+
     </div>
-    <div class = "column is-half is-centered">
+    <div class = "column is-half is-centered has-background-success">
+        <h1 class="title is-4"> Log In </h1>
         <form method = "post" >
             {% csrf_token %} 
             {{ form.as_p }}
             <button type = "submit"> Log In </button>
         </form>
     </div>
-   </div> 
-
+</div>
 {% endblock %}

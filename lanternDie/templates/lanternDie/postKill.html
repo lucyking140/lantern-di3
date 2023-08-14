@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<div class = "column">
+
+</div>
+
+<div class = "columns">
+    <div class = "column is-one-quarter">
+        
+    </div>
+    <div class = "column has-background-success">
+        <div class="column">
+            <h1 class="title is-4">
+            Document a Lantern Fly Kill!
+            </h1>
+        </div>
+        <br>
+        <div class="block">
+            <form method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <label for="{{ form.caption.id_for_label }}">Tell us a bit about your kill:</label>
+                <input type="text" id="id_caption" name="caption" required>
+                <br>
+                <br>
+                <label for="{{ form.image.id_for_label }}">Image:</label>
+                <!-- <input type="file" id="id_profPic" name="profPic" required>  -->
+                {{ form.image }}
+                <br>
+                <br>
+                <button type="submit">Share Kill</button>
+            </form>
+        </div>
+    </div>
+    <div class = "column is-one-fifth">
+
+    </div>
+</div>
+
+{% endblock %}

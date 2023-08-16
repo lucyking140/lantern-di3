@@ -18,7 +18,9 @@ def registration(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect(reverse("lanternDie:dashboard"))
+        else:
+            print(form.errors)
+        return redirect(reverse("lanternDie:dashboard"))
 
 def kill_view(request):
     post = get_object_or_404(models.Kill)

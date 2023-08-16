@@ -424,6 +424,12 @@ a.box:active {
     background-color: transparent;
     border-color: transparent;
   }
+  .button.has-shadow {
+    box-shadow: 0px -25px 20px -20px rgba(213, 197, 180, 1),
+        25px 0px 20px -20px rgba(213, 197, 180, 1),
+        0px 25px 20px -20px rgba(213, 197, 180, 1),
+        -25px 0px 20px -20px rgba(213, 197, 180, 1);
+  }
   .button strong {
     color: inherit; }
   .button .icon, .button .icon.is-small, .button .icon.is-medium, .button .icon.is-large {

@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import dashboard, profile_list, profile, registration, kill_view, postKill, changeProf
+from django.contrib.auth import views as auth_views
 
 app_name = "lanternDie"
 
@@ -10,6 +11,6 @@ urlpatterns = [
     path("registration/", registration, name="registration"),
     path("kill/", kill_view, name = "kill"),
     path("postKill/", postKill, name = "postKill"),
-    path("changeProf/", changeProf, name = "changeProf")
-    
+    path("changeProf/", changeProf, name = "changeProf"),
+    path('change_password/', auth_views.PasswordChangeView.as_view(template_name = 'lanternDie/change_password.html', success_url = '/'), name = "change_password"),
 ]

@@ -4,7 +4,7 @@ from .models import Kill, Profiles
 
 class KillForm(forms.ModelForm):
     caption = forms.CharField(required = True, widget = forms.widgets.Textarea(attrs={"placeholder": "thoughts on your kill?", "class": "textarea is-grey is-medium",}), label="",)
-    image = forms.ImageField(required = True, label = "",)
+    image = forms.ImageField(required = True, default = "empty_post.jpg", label = "",)
     class Meta:
         model = Kill
         exclude = ("user", )

@@ -34,7 +34,7 @@ post_save.connect(create_profile, sender=User) #whenever User implements.save(),
 
 class Kill(models.Model):
     user = models.ForeignKey(User, related_name = "kills", on_delete = models.DO_NOTHING)
-    image = models.ImageField(default = "empty_post.jpg", upload_to = 'kills') #folder in django-lanterndie/backend/media
+    image = models.ImageField(upload_to = 'kills', default = 'static/empty_post.jpg')
     caption = models.CharField(max_length=140)
     posted_time = models.DateTimeField(auto_now_add=True)
     

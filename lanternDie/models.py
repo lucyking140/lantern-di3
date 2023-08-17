@@ -6,7 +6,7 @@ class Profiles(models.Model):
     user = models.OneToOneField(User, default="01", on_delete=models.CASCADE, related_name="profile") #creating profiles
     follows = models.ManyToManyField("self", related_name="followed_by", symmetrical = False, blank = True)
     killCount = models.IntegerField(default = 0)
-    profPic = models.ImageField(upload_to='profile_pics/', default='fly.webp')
+    profPic = models.ImageField(upload_to='profile_pics', default='fly.webp')
     
     object = models.Manager()
     
@@ -34,7 +34,7 @@ post_save.connect(create_profile, sender=User) #whenever User implements.save(),
 
 class Kill(models.Model):
     user = models.ForeignKey(User, related_name = "kills", on_delete = models.DO_NOTHING)
-    image = models.ImageField(upload_to = 'kills', default = 'static/empty_post.jpg')
+    image = models.ImageField(upload_to = 'kills', default = 'empty_post.jpg')
     caption = models.CharField(max_length=140)
     posted_time = models.DateTimeField(auto_now_add=True)
     

@@ -15,6 +15,7 @@ import secrets
 from pathlib import Path
 import dj_database_url
 from decouple import config
+import boto3
 
 #config.load_dotenv()
 

@@ -226,6 +226,8 @@ aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 
+print(type(aws_bucket_name))
+
 # Initialize the S3 client
 s3_client = boto3.client(
     "s3",
@@ -235,7 +237,7 @@ s3_client = boto3.client(
 
 # Define the local file path and S3 object key
 local_file_path = "lanternflyTest.jpeg"
-s3_object_key = "lanterndi3-heroku/lanternflyTest.jpe"
+s3_object_key = "lanterndi3-heroku/lanternflyTest.jpeg"
 
 # Upload the file to S3
 with open(local_file_path, "rb") as file:

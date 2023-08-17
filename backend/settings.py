@@ -184,7 +184,7 @@ MEDIA_URL = '/media/' #setting the base path for all images
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
+'''
 #Configuring Bucketeer for AWS S3 file management
 AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('BUCKETEER_AWS_SECRET_ACCESS_KEY')
@@ -200,12 +200,6 @@ STATIC_LOCATION = 'static'
 STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
 STATICFILES_STORAGE = 'storage_backends.StaticStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
 PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
 PUBLIC_MEDIA_LOCATION = 'media/public'
 
@@ -216,7 +210,35 @@ DEFAULT_FILE_STORAGE = 'storage_backends.PublicMediaStorage'
 PRIVATE_MEDIA_DEFAULT_ACL = 'private'
 PRIVATE_MEDIA_LOCATION = 'media/private'
 PRIVATE_FILE_STORAGE = 'storage_backends.PrivateMediaStorage'
+'''
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+#second attempt at above
+
+# Retrieve AWS credentials from environment variables
+aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+
+# Initialize the S3 client
+s3_client = boto3.client(
+    "s3",
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key
+)
+
+# Define the local file path and S3 object key
+local_file_path = "lanternflyTest.jpeg"
+s3_object_key = "lanterndi3-heroku/lanternflyTest.jpe"
+
+# Upload the file to S3
+with open(local_file_path, "rb") as file:
+    s3_client.upload_fileobj(file, aws_bucket_name, s3_object_key)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

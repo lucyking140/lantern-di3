@@ -16,7 +16,7 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 
-config.load_dotenv()
+#config.load_dotenv()
 
 '''
 #import dj_database_url
@@ -186,12 +186,12 @@ MEDIA_URL = '/media/' #setting the base path for all images
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 #Configuring Bucketeer for AWS S3 file management
-AWS_ACCESS_KEY_ID = config('BUCKETEER_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('BUCKETEER_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('BUCKETEER_BUCKET_NAME')
-AWS_S3_REGION_NAME = config('BUCKETEER_AWS_REGION')
+AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('BUCKETEER_AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('BUCKETEER_BUCKET_NAME')
+AWS_S3_REGION_NAME = os.environ.get('BUCKETEER_AWS_REGION')
 AWS_DEFAULT_ACL = None
-AWS_S3_SIGNATURE_VERSION = config('S3_SIGNATURE_VERSION', default='s3v4')
+AWS_S3_SIGNATURE_VERSION = os.environ.get('S3_SIGNATURE_VERSION', default='s3v4')
 AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 

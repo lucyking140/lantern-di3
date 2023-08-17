@@ -15,12 +15,15 @@ def registration(request):
             )
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
+        print("request.FILES: ", request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
+            print("saved user form")
         else:
             print(form.errors)
-        return redirect(reverse("lanternDie:dashboard"))
+        #return redirect(reverse("lanternDie:dashboard"))
+        return render(request, 'lanternDie/dashboard.html', {'form': form})
 
 def kill_view(request):
     post = get_object_or_404(models.Kill)
@@ -54,7 +57,7 @@ def profile(request, pk):
     return render(request, "lanternDie/profile.html", {"profile": profile})
     
 def postKill(request):
-    form = KillForm(request.POST or None, request.FILES)
+    form = KillForm(request.POST or None, request.FILES or None)
     if request.method == "POST":
         if form.is_valid():
             kill = form.save(commit = False)
@@ -67,7 +70,7 @@ def postKill(request):
     return render(request, "lanternDie/postKill.html", {"form": form})
 
 def changeProf(request):
-    user_form = UpdateUserForm(request.POST or None, request.FILES, instance=request.user.profile)
+    user_form = UpdateUserForm(request.POST or None, request.FILES or None, instance=request.user.profile)
     if request.method == 'POST':
         print("is indeed a post")
         if user_form.is_valid():

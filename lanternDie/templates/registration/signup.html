@@ -14,7 +14,7 @@
     <div class = "column is-half is-centered has-background-success">
         <h1 class="title is-2"> Sign Up </h1>
         <p class = "title is-6"> Welcome to LanternDie! </p>
-        <form method = "post" enctype="multipart/form-data" >
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %} 
             {{ form.as_p }}
             <input type = "submit" value = "Register">

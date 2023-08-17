@@ -35,9 +35,11 @@
                         Dashboard           
                     </a>
             
-                    <a class="navbar-item"  href = "{% url 'lanternDie:profile_list' %}">
-                        All Users           
-                    </a>
+                    {% if request.user.profile %}
+                        <a class="navbar-item"  href = "{% url 'lanternDie:profile_list' %}">
+                            All Users           
+                        </a>
+                    {% endif %}
 
                     <div class="navbar-item">
                         <div class="buttons">
@@ -45,11 +47,11 @@
                                 <a class="button is-success" href="{% url 'lanternDie:profile' request.user.profile.id %}">
                                     View Profile
                                 </a>
+                    
+                                <a class="button is-light" href = "{% url 'logout' %}">
+                                    Log Out
+                                </a>
                             {% endif %}
-                            
-                            <a class="button is-light" href = "{% url 'logout' %}">
-                                Log Out
-                            </a>
                         </div>
                     </div>
                 </div>

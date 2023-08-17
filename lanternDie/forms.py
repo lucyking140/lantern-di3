@@ -12,6 +12,7 @@ class KillForm(forms.ModelForm):
         
 class CustomUserCreationForm(UserCreationForm):
     profPic = forms.ImageField(required = True, label = "profPic",)
+    
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("email", "profPic",)
         

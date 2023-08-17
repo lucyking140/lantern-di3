@@ -198,7 +198,7 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 STATIC_DEFAULT_ACL = 'public-read'
 STATIC_LOCATION = 'static'
 STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
-STATICFILES_STORAGE = 'lanternDie.backend.storage_backends.StaticStorage'
+STATICFILES_STORAGE = 'storage_backends.StaticStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
@@ -210,12 +210,12 @@ PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
 PUBLIC_MEDIA_LOCATION = 'media/public'
 
 MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'lanternDie.backend.storage_backends.PublicMediaStorage'
+DEFAULT_FILE_STORAGE = 'storage_backends.PublicMediaStorage'
 
 #only currently using the public class but this could be useful later
 PRIVATE_MEDIA_DEFAULT_ACL = 'private'
 PRIVATE_MEDIA_LOCATION = 'media/private'
-PRIVATE_FILE_STORAGE = 'lanternDie.backend.storage_backends.PrivateMediaStorage'
+PRIVATE_FILE_STORAGE = 'storage_backends.PrivateMediaStorage'
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

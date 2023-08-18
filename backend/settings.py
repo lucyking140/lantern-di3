@@ -226,13 +226,17 @@ aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
 aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 
+#aws_bucket_name = "lanterndi3-heroku"
 print(type(aws_bucket_name))
+print("bucket name: ", aws_bucket_name)
 
 # Initialize the S3 client
 s3_client = boto3.client(
     "s3",
     aws_access_key_id=aws_access_key_id,
     aws_secret_access_key=aws_secret_access_key
+    #aws_access_key_id='AKIASGSDA34MAY223WPL',
+    #aws_secret_access_key='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'
 )
 
 # Define the local file path and S3 object key

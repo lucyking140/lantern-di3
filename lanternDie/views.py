@@ -15,7 +15,7 @@ def registration(request):
             )
     elif request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
-        print("request.FILES: ", request.FILES)
+        #print("request.FILES: ", request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -39,6 +39,7 @@ def profile_list(request):
     
 def profile(request, pk):
     profile = Profiles.object.get(pk = pk) #get call to the database of users
+    profPicUrl = f"https://lanterndi3-heroku.s3.amazonaws.com/ { profile.profPicKey }"
     if request.method == "POST": #idea here is that a user (current user) is on a given profile's (profile) page when they request to follow them, so that form is submitted to the profile view
         print("profile: ", profile)
         current_user = request.user.profile
@@ -54,7 +55,7 @@ def profile(request, pk):
         current_user.save()
         print("successfully un/followed user")
     
-    return render(request, "lanternDie/profile.html", {"profile": profile})
+    return render(request, "lanternDie/profile.html", {"profile": profile, "profPicUrl": profPicUrl})
     
 def postKill(request):
     form = KillForm(request.POST or None, request.FILES or None)

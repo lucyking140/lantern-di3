@@ -12,6 +12,8 @@ class KillForm(forms.ModelForm):
         
 class CustomUserCreationForm(UserCreationForm):
     profPic = forms.ImageField(required = True, label = "profPic",)
+    #profPicUrl = forms.CharField(required = True, label="")
+    #profPic= f"https://lanterndi3-heroku.s3.amazonaws.com/" + profPicUrl
     
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("email", "profPic",)
@@ -28,6 +30,8 @@ class UpdateUserForm(forms.ModelForm):
     email = forms.EmailField(required=True,
                              widget=forms.widgets.Textarea(attrs={'class': 'textarea is-grey is-small'}), label = "",)
     profPic = forms.ImageField(required = True, label = "",)
+    #profPicUrl = forms.CharField(required = True, label="")
+    #profPic= f"https://lanterndi3-heroku.s3.amazonaws.com/" + profPicUrl
 
     class Meta:
         model = Profiles

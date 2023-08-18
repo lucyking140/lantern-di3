@@ -7,7 +7,7 @@ class Profiles(models.Model):
     follows = models.ManyToManyField("self", related_name="followed_by", symmetrical = False, blank = True)
     killCount = models.IntegerField(default = 0)
     #profPic = models.ImageField(upload_to='profile_pics', default='fly.webp')
-    profPicKey = models.CharField(max_length = 500, default="fly.webp") #setting the s3 url for the specific file
+    profPicKey = models.CharField(default = "fly.webp", max_length = 500) #setting the s3 url for the specific file
     
     object = models.Manager()
     

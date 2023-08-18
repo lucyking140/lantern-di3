@@ -222,9 +222,12 @@ STATICFILES_DIRS = [
 #second attempt at above
 
 # Retrieve AWS credentials from environment variables
-aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
-aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
-aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+#aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+#aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+#aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+aws_access_key_id = 'AKIASGSDA34MAY223WPL'
+aws_secret_access_key = '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'
+aws_bucket_name = 'lanterndi3-heroku'
 
 print(type(aws_bucket_name))
 print("bucket name: ", aws_bucket_name)

@@ -16,8 +16,27 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 import boto3
+import django-heroku
+from storages.backends.s3boto3 import S3Boto3Storage
 
-#config.load_dotenv()
+# Configure Amazon S3 settings
+AWS_ACCESS_KEY_ID = 'AKIASGSDA34MAY223WPL'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'lanterndi3-heroku'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+
+# Use Amazon S3 for static and media files
+DEFAULT_FILE_STORAGE = 'lanternDie.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
+
+# Configure Django-Heroku
+django_heroku.settings(locals())
+
+# Use the following storage backend for media files
+class MediaStorage(S3Boto3Storage):
+    location = 'media'
+    file_overwrite = False  # Set this to True if you want to overwrite files
+
 
 '''
 #import dj_database_url
@@ -190,7 +209,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/' #setting the base path for all images
 
-
+'''
 #Configuring Bucketeer for AWS S3 file management
 AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('BUCKETEER_AWS_SECRET_ACCESS_KEY')
@@ -217,7 +236,7 @@ PRIVATE_MEDIA_DEFAULT_ACL = 'private'
 PRIVATE_MEDIA_LOCATION = 'media/private'
 PRIVATE_FILE_STORAGE = 'storage_backends.PrivateMediaStorage'
 
-'''
+
 #second attempt at above
 
 # Retrieve AWS credentials from environment variables

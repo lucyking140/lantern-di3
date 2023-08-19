@@ -7,7 +7,7 @@
     
     </div>
     <div class = "column">
-        <div class = "columns">
+        <div class = "columns"> <!-- header with prof pic and user info -->
             <div class="media-left">
                 <div class = "column">
 
@@ -40,7 +40,7 @@
 
             </div>
 
-            <!-- revised following/followed by lists -->
+            <!-- following/followed by lists -->
             <div class="dropdown is-hoverable">
                 <div class="dropdown-trigger">
                 <button class="button has-shadow is-light is-small" aria-haspopup="true" aria-controls="dropdown-menu">
@@ -102,6 +102,7 @@
             </div>
        </div>
     
+       <!-- giving the current user (if not their profile) the option to follow/unfollow -->
         {% if profile.user.username != user.username %}  
             <div class = "column">
                 <form method = "post"> <!-- to send data via this form -->
@@ -110,7 +111,6 @@
                         {% if profile in profile.user.follows.all %} <!-- greys out follow button if already following -->
                             <button class="button is-success is-static is-small">Follow</button>
                             <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
-                            <!-- name is the key used to access the value, and the value is what is sent to the view -->
                         {% else %} 
                             <button class="button is-dark is-small" name="follow" value="follow">Follow</button>
                             <button class="button is-static is-small">Unfollow</button>
@@ -152,6 +152,7 @@
     
     </div>
     
+    <!-- profile changing options for active user only -->
     <div class = "column is-one-quarter">
     
         <div class = "column">
@@ -176,71 +177,6 @@
                 </div>
                
             {% endif %}
-
-                <!--
-                <div class="dropdown is-hoverable">
-                    <div class="dropdown-trigger">
-                    <button class="button is-success" aria-haspopup="true" aria-controls="dropdown-menu">
-                        <span>Following </span>
-                        <span class="icon is-small">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                    </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
-                        {% for following in profile.follows.all %}
-                            {% if following.user.username != profile.user.username %}
-                                <a href="{% url 'lanternDie:profile' following.id %}" class="button is-transparent">
-                                    {{ following.user.username }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-
-                        {% if not profile.follows.all %}
-                            <a href="{% url 'lanternDie:profile_list' %}" class="button is-transparent">
-                            Oops! No one here yet.
-                            <br>
-                            Click to change that!
-                            </a>
-                        {% endif %}
-                    </div>
-                    </div>
-                </div>
-
-                <div class = "column">
-
-                </div>
-
-                <div class="dropdown is-hoverable">
-                    <div class="dropdown-trigger">
-                    <button class="button is-success" aria-haspopup="true" aria-controls="dropdown-menu">
-                        <span>Followed By </span>
-                        <span class="icon is-small">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                    </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
-                        {% for user1 in users %}                        
-                            {% if profile.user in user1.follows.all %} 
-                                <a href="{% url 'lanternDie:profile' user1.id %}" class="button is-transparent">
-                                    {{ user1.username }}
-                                </a>
-                            {% endif %}
-                        {% endfor %}
-
-                        {% if not user1.follows.all %}
-                            <p> Oops! No one here yet.</p>
-                        {% endif %}
-                    </div>
-                    </div>
-                </div> -->
-
-
-
-
 
         </div> 
     </div>

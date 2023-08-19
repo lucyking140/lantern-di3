@@ -87,8 +87,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
 # Application definition
+
+#implementing collectfast to speed up collectstatic
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -96,6 +99,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "collectfast",
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
@@ -207,7 +211,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/' #setting the base path for all images
 '''
 
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ORIGIN_WHITELIST = [
@@ -217,5 +220,5 @@ CORS_ORIGIN_WHITELIST = [
 LOGIN_REDIRECT_URL = "/" #redirecting to the homepage
 LOGOUT_REDIRECT_URL = "/"
 
-import django_heroku
-django_heroku.settings(locals(), staticfiles=False)
+#import django_heroku
+#django_heroku.settings(locals(), staticfiles=False)

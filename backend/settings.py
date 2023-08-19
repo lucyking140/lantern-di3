@@ -257,7 +257,7 @@ AWS_DEFAULT_ACL = 'public-read'
 AWS_QUERYSTRING_AUTH = False
 
 # Use Amazon S3 for static and media files
-DEFAULT_FILE_STORAGE = 'lanternDie.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
+DEFAULT_FILE_STORAGE = 'backend.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
 
 # Use the following storage backend for media files
 class MediaStorage(S3Boto3Storage):

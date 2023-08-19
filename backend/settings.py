@@ -265,7 +265,7 @@ DEFAULT_FILE_STORAGE = 'storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO 
 class MediaStorage(S3Boto3Storage):
     location = 'media'
     file_overwrite = False  # Set this to True if you want to overwrite files
-''
+'''
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -280,3 +280,4 @@ LOGOUT_REDIRECT_URL = "/"
 
 # Heroku configuration
 #django_heroku.settings(locals())
+

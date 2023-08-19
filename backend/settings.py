@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import secrets
 from pathlib import Path
-import dj_database_url
-from decouple import config
-import boto3
-import django_heroku
-from storages.backends.s3boto3 import S3Boto3Storage
-from storage_backends import MediaStorage
+#import dj_database_url
+#from decouple import config
+#import boto3
+#import django_heroku
+#from storages.backends.s3boto3 import S3Boto3Storage
+#from storage_backends import MediaStorage
 
 '''
 #import dj_database_url
@@ -72,7 +72,15 @@ print("base dir: ", str(BASE_DIR))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-u3%w(irr39z7$yup#39=%-x@9w90v8kw=xdct&@8g3d-frm9c-"
 #SECRET_KEY = os.environ.get('SECRET_KEY')
-#LINE ABOVE COMMENDED OUT FOR SECURITY
+
+# AWS S3 SETTINGS
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_URL = os.environ.get('AWS_URL')
+AWS_DEFAULT_ACL = None #might try changing to 'public-read'?
+AWS_S3_REGION_NAME = 'us-east-2'
+#AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -179,6 +187,13 @@ USE_TZ = True
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
+#static and media URLS with S3
+STATIC_URL = AWS_URL + '/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+MEDIA_URL = AWS_URL + '/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+'''
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -190,82 +205,8 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/' #setting the base path for all images
-
-'''
-#Configuring Bucketeer for AWS S3 file management
-AWS_ACCESS_KEY_ID = os.environ.get('BUCKETEER_AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('BUCKETEER_AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('BUCKETEER_BUCKET_NAME')
-AWS_S3_REGION_NAME = os.environ.get('BUCKETEER_AWS_REGION')
-AWS_DEFAULT_ACL = None
-AWS_S3_SIGNATURE_VERSION = os.environ.get('S3_SIGNATURE_VERSION', default='s3v4')
-AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
-STATIC_DEFAULT_ACL = 'public-read'
-STATIC_LOCATION = 'static'
-STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
-STATICFILES_STORAGE = 'storage_backends.StaticStorage'
-
-PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
-PUBLIC_MEDIA_LOCATION = 'media/public'
-
-MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'storage_backends.PublicMediaStorage'
-
-#only currently using the public class but this could be useful later
-PRIVATE_MEDIA_DEFAULT_ACL = 'private'
-PRIVATE_MEDIA_LOCATION = 'media/private'
-PRIVATE_FILE_STORAGE = 'storage_backends.PrivateMediaStorage'
-
-
-#second attempt at above
-
-# Retrieve AWS credentials from environment variables
-#aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
-#aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
-#aws_bucket_name = os.environ.get("AWS_STORAGE_BUCKET_NAME")
-aws_access_key_id = 'AKIASGSDA34MAY223WPL'
-aws_secret_access_key = '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'
-aws_bucket_name = 'lanterndi3-heroku'
-
-print(type(aws_bucket_name))
-print("bucket name: ", aws_bucket_name)
-
-# Initialize the S3 client
-s3_client = boto3.client(
-    "s3",
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key
-)
-
-# Define the local file path and S3 object key
-local_file_path = "lanternflyTest.jpeg"
-s3_object_key = "lanterndi3-heroku/lanternflyTest.jpeg"
-
-# Upload the file to S3
-with open(local_file_path, "rb") as file:
-    s3_client.upload_fileobj(file, aws_bucket_name, s3_object_key)
 '''
 
-#####################
-
-# Configure Amazon S3 settings
-AWS_ACCESS_KEY_ID = 'AKIASGSDA34MAY223WPL'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'lanterndi3-heroku'
-AWS_DEFAULT_ACL = 'public-read'
-AWS_QUERYSTRING_AUTH = False
-
-# Use Amazon S3 for static and media files
-DEFAULT_FILE_STORAGE = 'storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
-
-# Use the following storage backend for media files
-'''
-class MediaStorage(S3Boto3Storage):
-    location = 'media'
-    file_overwrite = False  # Set this to True if you want to overwrite files
-'''
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -276,8 +217,5 @@ CORS_ORIGIN_WHITELIST = [
 LOGIN_REDIRECT_URL = "/" #redirecting to the homepage
 LOGOUT_REDIRECT_URL = "/"
 
-#django_heroku.settings(locals())
-
-# Heroku configuration
-#django_heroku.settings(locals())
-
+import django_heroku
+django_heroku.settings(locals(), staticfiles=False)

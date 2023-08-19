@@ -41,7 +41,7 @@ def profile(request, pk):
     profile = Profiles.object.get(pk = pk) #get call to the database of users
     #profPicUrl = f"https://lanterndi3-heroku.s3.amazonaws.com/ { profile.profPicKey }"
     if request.method == "POST": #idea here is that a user (current user) is on a given profile's (profile) page when they request to follow them, so that form is submitted to the profile view
-        print("profile: ", profile)
+        print("profile1: ", profile)
         current_user = request.user.profile
         message = request.POST
         result = message.get("follow") #saying which key to get the message from

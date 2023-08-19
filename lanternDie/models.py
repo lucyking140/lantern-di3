@@ -6,7 +6,7 @@ class Profiles(models.Model):
     user = models.OneToOneField(User, default="01", on_delete=models.CASCADE, related_name="profile") #creating profiles
     follows = models.ManyToManyField("self", related_name="followed_by", symmetrical = False, blank = True)
     killCount = models.IntegerField(default = 0)
-    profPic = models.ImageField(upload_to='profile_pics', default='fly.webp')
+    profPic = models.ImageField(upload_to='profile_pics/', default='fly.webp')
     #profPicKey = models.CharField(default = 'fly', max_length = 500) #setting the s3 url for the specific file
     
     object = models.Manager()
@@ -17,6 +17,9 @@ class Profiles(models.Model):
     def addKill(self): #used whenever a kill is posted
         self.killCount += 1
         self.save()
+        
+    def get_absolute_url(self):
+        return self.profPic.url
         
 #automatically creating a profile for a user when they join
 def create_profile(sender, instance, created, **kwargs):

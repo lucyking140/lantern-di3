@@ -8,7 +8,7 @@ class ProfileInline(admin.StackedInline):
 
 class UserAdmin(admin.ModelAdmin):
     model = User
-    field = ["username", "emailaddress", "firstname", "lastname", "staffstatus", "killCount"] #these are the default user characteristics
+    field = ["username", "emailaddress", "firstname", "lastname", "staffstatus", "killCount", "profPic"] #these are the default user characteristics
     inlines = [ProfileInline] #registering inline makes the profile info appear under the user info in the admin page
     
 class KillAdmin(admin.ModelAdmin):

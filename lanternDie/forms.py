@@ -16,7 +16,8 @@ class CustomUserCreationForm(UserCreationForm):
     #profPic= f"https://lanterndi3-heroku.s3.amazonaws.com/" + profPicUrl
     
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ("email", "profPic",)
+        profPic = forms.ImageField(required = True, label = "",)
+        fields = UserCreationForm.Meta.fields + ('email', 'profPic')
         
         def save(self, commit = False):
             instance = super(CustomUserCreationForm, self).save(commit=False) # create but don't save yet

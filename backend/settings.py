@@ -19,25 +19,6 @@ import boto3
 import django_heroku
 from storages.backends.s3boto3 import S3Boto3Storage
 
-# Configure Amazon S3 settings
-AWS_ACCESS_KEY_ID = 'AKIASGSDA34MAY223WPL'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'lanterndi3-heroku'
-AWS_DEFAULT_ACL = 'public-read'
-AWS_QUERYSTRING_AUTH = False
-
-# Use Amazon S3 for static and media files
-DEFAULT_FILE_STORAGE = 'lanternDie.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
-
-# Configure Django-Heroku
-django_heroku.settings(locals())
-
-# Use the following storage backend for media files
-class MediaStorage(S3Boto3Storage):
-    location = 'media'
-    file_overwrite = False  # Set this to True if you want to overwrite files
-
-
 '''
 #import dj_database_url
 
@@ -265,6 +246,28 @@ s3_object_key = "lanterndi3-heroku/lanternflyTest.jpeg"
 with open(local_file_path, "rb") as file:
     s3_client.upload_fileobj(file, aws_bucket_name, s3_object_key)
 '''
+
+#####################
+
+# Configure Amazon S3 settings
+AWS_ACCESS_KEY_ID = 'AKIASGSDA34MAY223WPL'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'lanterndi3-heroku'
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+
+# Use Amazon S3 for static and media files
+DEFAULT_FILE_STORAGE = 'lanternDie.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
+
+# Configure Django-Heroku
+django_heroku.settings(locals())
+
+# Use the following storage backend for media files
+class MediaStorage(S3Boto3Storage):
+    location = 'media'
+    file_overwrite = False  # Set this to True if you want to overwrite files
+
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ORIGIN_WHITELIST = [
@@ -275,3 +278,6 @@ LOGIN_REDIRECT_URL = "/" #redirecting to the homepage
 LOGOUT_REDIRECT_URL = "/"
 
 #django_heroku.settings(locals())
+
+# Heroku configuration
+django_heroku.settings(locals())

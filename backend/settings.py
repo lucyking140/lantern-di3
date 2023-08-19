@@ -16,7 +16,7 @@ from pathlib import Path
 import dj_database_url
 from decouple import config
 import boto3
-import django-heroku
+import django_heroku
 from storages.backends.s3boto3 import S3Boto3Storage
 
 # Configure Amazon S3 settings

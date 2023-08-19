@@ -18,6 +18,7 @@ from decouple import config
 import boto3
 import django_heroku
 from storages.backends.s3boto3 import S3Boto3Storage
+from storage_backends import MediaStorage
 
 '''
 #import dj_database_url
@@ -260,10 +261,11 @@ AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
 
 # Use the following storage backend for media files
+'''
 class MediaStorage(S3Boto3Storage):
     location = 'media'
     file_overwrite = False  # Set this to True if you want to overwrite files
-
+''
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

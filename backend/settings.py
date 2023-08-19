@@ -180,10 +180,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'lanternDie/static'),
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -259,9 +259,6 @@ AWS_QUERYSTRING_AUTH = False
 # Use Amazon S3 for static and media files
 DEFAULT_FILE_STORAGE = 'lanternDie.storage_backends.MediaStorage' #MIGHT NEED tO CHANGE TO BACKEND OR SOMETHING OF THE LIKES
 
-# Configure Django-Heroku
-django_heroku.settings(locals())
-
 # Use the following storage backend for media files
 class MediaStorage(S3Boto3Storage):
     location = 'media'
@@ -280,4 +277,4 @@ LOGOUT_REDIRECT_URL = "/"
 #django_heroku.settings(locals())
 
 # Heroku configuration
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

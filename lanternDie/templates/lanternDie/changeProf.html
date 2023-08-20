@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class = "columns">
-    <div class = "column is-one-fifth">
+    <div class = "column is-one-fifth  is-mobile">
         
     </div>
     <div class = "column">
@@ -27,8 +27,8 @@
             </form>
         </div>
         {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
-            <div class="alert alert-danger alert-dismissible has-text-danger is-italic" role="alert">
-                <div id="form_errorshas-text-danger is-italic is-">
+            <div class="alert alert-danger alert-dismissible has-text-grey-dark is-italic" role="alert">
+                <div id="form_errors has-text-grey-dark is-italic is-">
                     Sorry! 
                     {% for key, value in user_form.errors.items %}
                         {{ value }}

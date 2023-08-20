@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class = "column">
+<div class = "column is-mobile">
     <h1 class = "title is-4"> Click on a user below to view their profile </h1>
 </div>
 
@@ -21,12 +21,11 @@
                                 <img src = "{{ profile.profPic.url }}">
                             </figure>
                         </div>
+                        <div class = "column">
+                            <h1 class = "title" > {{ profile.user.username }} </h1>
+                        </div>
                     </div>
-                   <div class = "column">
-                        <h1 class = "title" > {{ profile.user.username }} </h1>
-                   </div>
-                </div>
-                                
+                </div>               
             </a>
             
         </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class = "has-navbar-fixed-top has-navbar-fixed-bottom">
+<html lang="en" class = "has-navbar-static-top has-navbar-fixed-bottom">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content = "IE=edge">
@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/8c2330c86c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-            <nav class="navbar is-expanded is-fixed-top has-background-primary" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-expanded is-static-top has-background-primary" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <!-- <a class="navbar-item" href="https://bulma.io">
                     <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -57,53 +57,7 @@
                 </div>
               </nav>
             
-            <!-- <div class = "column">
-
-            </div>
-            <nav class="level"> Top bar with links
-                {% if user.is_authenticated %}
-                    <p class="level-item has-text-centered">
-                        <a href="{% url 'lanternDie:profile_list' %}" >
-                            <button class = "button is-ghost is-small is-one-quarter is-hovered">
-                                All Profiles
-                            </button>
-                        </a>
-                    </p>
-                    <p class="level-item has-text-centered">
-                        <a href="{% url 'lanternDie:profile' request.user.profile.id %}">
-                            <button class = "button is-ghost is-small is-one-quarter is-hovered">
-                                Your Profile
-                            </button>
-                        </a>
-                    </p>
-                {% endif %}
-                <div class = "column">
-                    <p class="level-item has-text-centered">
-                        <h1 class="title is-3 has-text-danger"> 
-                            Lantern Die 
-                        </h1>
-                    </p>
-                </div>
-                {% if user.is_authenticated %}
-                    <p class="level-item has-text-centered">
-                        <a href = "{% url 'logout' %}">
-                            <button class = "button is-ghost is-small is-one-quarter is-hovered">
-                                Log Out
-                            </button>
-                        </a>
-                    </p>
-                    <p class="level-item has-text-centered">
-                        <a href = "{% url 'lanternDie:dashboard' %}">
-                            <button class = "button is-ghost is-small is-one-quarter is-hovered">
-                                Return to Dashboard
-                            </button>
-                        </a>
-                    </p>
-                {% endif %}
-            </nav> -->
-        <!-- <div class = "container.is-widescreen"> -->
-            <!-- <div class = "columns"> -->
-        {% block content %} <!--this is where the child templates are implemented -->
+        {% block content %} <!-- all other templates -->
         {% endblock content %}
 
         <nav class="navbar is-expanded is-fixed-bottom has-background-success" role="navigation" aria-label="main navigation">

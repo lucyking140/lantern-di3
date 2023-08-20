@@ -397,6 +397,9 @@ table th {
   color: #3c3c3c;
   display: block;
   padding: 1.25rem; }
+  .box.is-success {
+    background-color: #FFA3A3;
+  }
 
 a.box:hover, a.box:focus {
   box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1), 0 0 0 1px #485fc7; }
@@ -417,6 +420,16 @@ a.box:active {
   padding-top: calc(0.5em - 2px);
   text-align: center;
   white-space: nowrap; }
+  .button.is-transparent {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .button.has-shadow {
+    box-shadow: 0px -25px 20px -20px rgba(213, 197, 180, 1),
+        25px 0px 20px -20px rgba(213, 197, 180, 1),
+        0px 25px 20px -20px rgba(213, 197, 180, 1),
+        -25px 0px 20px -20px rgba(213, 197, 180, 1);
+  }
   .button strong {
     color: inherit; }
   .button .icon, .button .icon.is-small, .button .icon.is-medium, .button .icon.is-large {
@@ -1424,7 +1437,8 @@ a.box:active {
 .content figure {
   margin-left: 2em;
   margin-right: 2em;
-  text-align: center; }
+  text-align: center;
+  border-radius: 20px }
   .content figure:not(:first-child) {
     margin-top: 2em; }
   .content figure:not(:last-child) {
@@ -1520,13 +1534,19 @@ div.icon-text {
 
 .image {
   display: block;
-  position: relative; }
+  position: relative;
+  object-fit: cover; }
   .image img {
     display: block;
     height: auto;
     width: 100%; }
     .image img.is-rounded {
       border-radius: 9999px; }
+    .image img.has-border-primary {
+      border: 3px solid #ff405d;
+      border-radius: 9999px;
+    }
+
   .image.is-fullwidth {
     width: 100%; }
   .image.is-square img,
@@ -3038,7 +3058,13 @@ a.tag:hover {
   box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1), 0 0px 0 1px rgba(0, 0, 0, 0.02);
   color: #3c3c3c;
   max-width: 100%;
-  position: relative; }
+  position: relative;
+}
+  .card.is-success {
+    background-color: #FFA3A3;
+    color: #FFA3A3;
+  }
+
 
 .card-header:first-child, .card-content:first-child, .card-footer:first-child {
   border-top-left-radius: 0.25rem;
@@ -3094,6 +3120,9 @@ a.tag:hover {
 .card-content {
   background-color: transparent;
   padding: 1.5rem; }
+.card-content.is-success {
+  background-color: #FFA3A3;
+}
 
 .card-footer {
   background-color: transparent;
@@ -3996,7 +4025,8 @@ button.dropdown-item {
     min-height: 3.25rem;
     width: 100%; }
   .navbar.has-shadow {
-    box-shadow: 0 2px 0 0 whitesmoke; }
+    box-shadow: 0 2px 0 0 whitesmoke;
+  }
   .navbar.is-fixed-bottom, .navbar.is-fixed-top {
     left: 0;
     position: fixed;
@@ -4005,7 +4035,10 @@ button.dropdown-item {
   .navbar.is-fixed-bottom {
     bottom: 0; }
     .navbar.is-fixed-bottom.has-shadow {
-      box-shadow: 0 -2px 0 0 whitesmoke; }
+      box-shadow: 0px -25px 20px -20px rgba(213, 197, 180, 1),
+        25px 0px 20px -20px rgba(213, 197, 180, 1),
+        0px 25px 20px -20px rgba(213, 197, 180, 1),
+        -25px 0px 20px -20px rgba(213, 197, 180, 1); }
   .navbar.is-fixed-top {
     top: 0; }
 
@@ -5253,7 +5286,7 @@ label.panel-block {
 
 .footer {
   background-color: #fafafa;
-  padding: 3rem 1.5rem 6rem; }
+  padding: 2rem 1.5rem 2rem; }
 
 /* Bulma Grid */
 .column {
@@ -5261,7 +5294,8 @@ label.panel-block {
   flex-basis: 0;
   flex-grow: 1;
   flex-shrink: 1;
-  padding: 0.75rem; }
+  padding: 0.75rem;
+  border-radius: 20px; }
   .columns.is-mobile > .column.is-narrow {
     flex: none;
     width: unset; }
@@ -5529,6 +5563,15 @@ label.panel-block {
     .column.is-four-fifths, .column.is-four-fifths-tablet {
       flex: none;
       width: 80%; }
+      /*ADDED LINE ----------------  */
+    .column.has-shadow {
+      /*box-shadow: 0 0.5em 0.5em -0.125em rgba(0, 0, 0, 0.1), 0 0px 0 1px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1), 0 0px 0 1px rgba(0, 0, 0, 0.02); */
+      box-shadow: 0px -25px 20px -20px rgba(213, 197, 180, 1),
+        25px 0px 20px -20px rgba(213, 197, 180, 1),
+        0px 25px 20px -20px rgba(213, 197, 180, 1),
+        -25px 0px 20px -20px rgba(213, 197, 180, 1);
+    }
     .column.is-offset-three-quarters, .column.is-offset-three-quarters-tablet {
       margin-left: 75%; }
     .column.is-offset-two-thirds, .column.is-offset-two-thirds-tablet {

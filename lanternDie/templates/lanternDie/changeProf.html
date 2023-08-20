@@ -7,21 +7,6 @@
         
     </div>
     <div class = "column">
-        {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <div id="form_errors">
-                    {% for key, value in user_form.errors.items %}
-                        <strong>{{ value }}</strong>
-                    {% endfor %}
-                    {% for key, value in prof_form.errors.items %}
-                        <strong>{{ value }}</strong>
-                    {% endfor %}
-                </div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endif %}
         <div class="column">
             <h2 class="title is-6">Update Profile</h2>
             Write your current information in fields you would like to keep the same.
@@ -41,6 +26,23 @@
                 <button type="submit">Save Changes</button>
             </form>
         </div>
+        {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
+            <div class="alert alert-danger alert-dismissible has-text-danger is-italic" role="alert">
+                <div id="form_errorshas-text-danger is-italic is-">
+                    Sorry! 
+                    {% for key, value in user_form.errors.items %}
+                        {{ value }}
+                    {% endfor %}
+                    {% for key, value in prof_form.errors.items %}
+                        {{ value }}
+                    {% endfor %}
+                    Please try again!
+                </div>
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+        {% endif %}
         
     </div>
     <div class = "column is-one-fifth">

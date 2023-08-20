@@ -20,10 +20,12 @@ def registration(request):
             user = form.save()
             login(request, user)
             print("saved user form")
+           
         else:
             print(form.errors)
         #return redirect(reverse("lanternDie:dashboard"))
-        return render(request, 'lanternDie/dashboard.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
+        
 
 def kill_view(request):
     post = get_object_or_404(models.Kill)

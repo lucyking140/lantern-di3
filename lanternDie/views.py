@@ -4,7 +4,7 @@ from .serializers import ldSerializer
 from .models import Profiles, Kill
 from django.views import generic
 from django.urls import reverse
-from .forms import KillForm, CustomUserCreationForm, UpdateUserForm
+from .forms import KillForm, CustomUserCreationForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login
 
 def registration(request):
@@ -34,11 +34,11 @@ def dashboard(request):
     return render(request, "lanternDie/dashboard.html")
     
 def profile_list(request):
-    profiles = Profiles.object.exclude(user=request.user)
+    profiles = Profiles.objects.exclude(user=request.user)
     return render(request, "lanternDie/profile_list.html", {"profiles": profiles})
     
 def profile(request, pk):
-    profile = Profiles.object.get(pk = pk) #get call to the database of users
+    profile = Profiles.objects.get(pk = pk) #get call to the database of users
     #profPicUrl = f"https://lanterndi3-heroku.s3.amazonaws.com/ { profile.profPicKey }"
     if request.method == "POST": #idea here is that a user (current user) is on a given profile's (profile) page when they request to follow them, so that form is submitted to the profile view
         print("profile1: ", profile)
@@ -63,7 +63,7 @@ def postKill(request):
         if form.is_valid():
             kill = form.save(commit = False)
             kill.user = request.user
-            Profiles.object.get(user_id = kill.user.id).addKill() #incrementing the user's number of kills
+            Profiles.objects.get(user_id = kill.user.id).addKill() #incrementing the user's number of kills
             kill.save()
             return redirect("lanternDie:dashboard") #prevents multiple submissions on resubmit
         else:
@@ -71,17 +71,21 @@ def postKill(request):
     return render(request, "lanternDie/postKill.html", {"form": form})
 
 def changeProf(request):
-    user_form = UpdateUserForm(request.POST or None, request.FILES or None, instance=request.user.profile)
+    user_form = UpdateUserForm(request.POST or None, instance=request.user)
+    prof_form = UpdateProfileForm(request.POST or None, request.FILES or None, instance=request.user.profile)
     if request.method == 'POST':
         print("is indeed a post")
-        if user_form.is_valid():
+        if user_form.is_valid() and prof_form.is_valid():
             user_form.save()
+            prof_form.save()
             print("successfully changed profile")
 
             return redirect("lanternDie:dashboard")
         else:
             print(user_form.errors)
+            print(prof_form.errors)
     else:
         user_form = UpdateUserForm(instance=request.user)
+        prof_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'lanternDie/changeProf.html', {'user_form': user_form})
+    return render(request, 'lanternDie/changeProf.html', {'user_form': user_form, 'prof_form': prof_form})

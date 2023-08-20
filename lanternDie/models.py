@@ -9,7 +9,7 @@ class Profiles(models.Model):
     profPic = models.ImageField(upload_to='profile_pics', default='fly.webp')
     #profPicKey = models.CharField(default = 'fly', max_length = 500) #setting the s3 url for the specific file
     
-    object = models.Manager()
+    objects = models.Manager()
     
     def __str__(self):
         return self.user.username
@@ -27,12 +27,12 @@ def create_profile(sender, instance, created, **kwargs):
     profile = None
     if created:
         print("making a profile for a created user")
-        profile = Profiles(user = instance)
+        profile = Profiles.objects.create(user = instance)
         profile.save()
     
     return profile
 
-post_save.connect(create_profile, sender=User) #whenever User implements.save(), this will also implement create_profile
+post_save.connect(create_profile, sender=User) #whenever User implements .save(), this will also implement create_profile
 
 #look into decorators to make this part more streamlined
 

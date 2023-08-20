@@ -78,7 +78,7 @@ AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_URL = os.environ.get('AWS_URL')
-AWS_DEFAULT_ACL = None #might try changing to 'public-read'?
+AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'us-east-2'
 #AWS_S3_SIGNATURE_VERSION = 's3v4'
 
@@ -90,8 +90,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 #implementing collectfast to speed up collectstatic
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
+#STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+#COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -99,7 +99,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "collectfast",
+    #"collectfast",
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
@@ -192,12 +192,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 #static and media URLS with S3
-STATIC_URL = AWS_URL + '/static/'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATIC_URL = AWS_URL + '/static/'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = AWS_URL + '/media/'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-'''
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -205,7 +205,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'lanternDie/static'),
 ]
-
+'''
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/' #setting the base path for all images

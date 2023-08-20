@@ -18,3 +18,4 @@ class KillAdmin(admin.ModelAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Kill, KillAdmin)
+admin.site.register(Profiles)

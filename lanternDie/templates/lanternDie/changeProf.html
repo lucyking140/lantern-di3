@@ -20,13 +20,29 @@
                 <label for="{{ user_form.email.id_for_label }}">New Email:</label>
                 <input type="email" id="id_email" name="email" required>
                 <br>
-                <label for="{{ prof_form.profPic.id_for_label }}">Profile Picture:</label>
-                <!-- <input type="file" id="id_profPic" name="profPic" required>  -->
+                <label for="{{ prof_form.profPic.id_for_label }}">New Profile Picture:</label>
+                    <input type="file" id="id_profPic" name="profPic" required>
                 {{ prof_form.profPic }}
                 <br>
                 <button type="submit">Save Changes</button>
             </form>
+            {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <div id="form_errors">
+                        {% for key, value in user_form.errors.items %}
+                            <strong>{{ value }}</strong>
+                        {% endfor %}
+                        {% for key, value in prof_form.errors.items %}
+                            <strong>{{ value }}</strong>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
         </div>
+        
     </div>
     <div class = "column is-one-fifth">
 

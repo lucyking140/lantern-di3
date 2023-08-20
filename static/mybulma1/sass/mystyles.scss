@@ -15,12 +15,9 @@ $tan-base: #f7e7d3;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
-$grey-dark: $grey;
-$grey-light: $grey-light;
 $primary: $tan-base;
 $success: $red-light;
 $danger: $plain-red;
-$link: $plain-red;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
@@ -33,10 +30,9 @@ $input-shadow: none;
 // Import only what you need from Bulma
 @import "../node_modules/bulma/sass/utilities/_all.sass";
 @import "../node_modules/bulma/sass/base/_all.sass";
-@import "../node_modules/bulma/sass/elements/button.sass";
-@import "../node_modules/bulma/sass/elements/container.sass";
-@import "../node_modules/bulma/sass/elements/title.sass";
+@import "../node_modules/bulma/sass/elements/_all.sass";
 @import "../node_modules/bulma/sass/form/_all.sass";
-@import "../node_modules/bulma/sass/components/navbar.sass";
-@import "../node_modules/bulma/sass/layout/hero.sass";
-@import "../node_modules/bulma/sass/layout/section.sass";
+@import "../node_modules/bulma/sass/components/_all.sass";
+@import "../node_modules/bulma/sass/layout/_all.sass";
+@import "../node_modules/bulma/sass/grid/_all.sass";
+@import "../node_modules/bulma/sass/helpers/_all.sass";

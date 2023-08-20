@@ -203,7 +203,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'lanternDie/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 '''
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     "lanternDie.apps.LanterndieConfig",
     "corsheaders",
     "rest_framework",
-    "lanternDie",
+    #"lanternDie",
     "storages",
 ]
 

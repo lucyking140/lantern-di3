@@ -101,6 +101,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     #"collectfast",
     "django.contrib.staticfiles",
+    "lanternDie.apps.LanternDieConfig",
     "corsheaders",
     "rest_framework",
     "lanternDie",

@@ -7,9 +7,24 @@
         
     </div>
     <div class = "column">
+        {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <div id="form_errors">
+                    {% for key, value in user_form.errors.items %}
+                        <strong>{{ value }}</strong>
+                    {% endfor %}
+                    {% for key, value in prof_form.errors.items %}
+                        <strong>{{ value }}</strong>
+                    {% endfor %}
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
         <div class="column">
             <h2 class="title is-6">Update Profile</h2>
-            Leave field blank to keep original.
+            Write your current information in fields you would like to keep the same.
         </div>
         <div class="block">
             <form method="post" enctype="multipart/form-data" >
@@ -22,23 +37,7 @@
                 <br>
                 <label for="{{ prof_form.profPic.id_for_label }}">New Profile Picture:</label>
                     <input type="file" id="id_profPic" name="profPic" required>
-                    {% comment %} {{ prof_form.profPic }} {% endcomment %}
                 <br>
-                {% if user_form.errors or prof_form.errors %} <!-- displaying form errors -->
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <div id="form_errors">
-                            {% for key, value in user_form.errors.items %}
-                                <strong>{{ value }}</strong>
-                            {% endfor %}
-                            {% for key, value in prof_form.errors.items %}
-                                <strong>{{ value }}</strong>
-                            {% endfor %}
-                        </div>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
                 <button type="submit">Save Changes</button>
             </form>
         </div>

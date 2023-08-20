@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+#from django.db.models.signals import post_save
 
 class Profiles(models.Model):
     user = models.OneToOneField(User, default="01", on_delete=models.CASCADE, related_name="profile") #creating profiles
@@ -20,7 +20,7 @@ class Profiles(models.Model):
         
     def get_absolute_url(self):
         return self.profPic.url
-        
+'''
 #automatically creating a profile for a user when they join
 def create_profile(sender, instance, created, **kwargs):
 #(**kwargs catches the extra variables that post_save sends -- can make this better later
@@ -31,9 +31,8 @@ def create_profile(sender, instance, created, **kwargs):
         profile.save()
     
     return profile
-
 post_save.connect(create_profile, sender=User) #whenever User implements .save(), this will also implement create_profile
-
+'''
 #look into decorators to make this part more streamlined
 
 class Kill(models.Model):

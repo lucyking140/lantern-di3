@@ -14,7 +14,7 @@ def registration(request):
                 {"form": CustomUserCreationForm}
             )
     elif request.method == "POST":
-        form = CustomUserCreationForm(request.POST, request.FILES)
+        form = CustomUserCreationForm(request.POST)
         #print("request.FILES: ", request.FILES)
         if form.is_valid():
             user = form.save()

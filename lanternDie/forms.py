@@ -11,14 +11,13 @@ class KillForm(forms.ModelForm):
         
         
 class CustomUserCreationForm(UserCreationForm):
-    profPic = forms.ImageField(required = True, label = "",)
+    #profPic = forms.ImageField(required = True, label = "",)
     #profPicUrl = forms.CharField(required = True, label="")
     #profPic= f"https://lanterndi3-heroku.s3.amazonaws.com/" + profPicUrl
     
     class Meta(UserCreationForm.Meta):
-        profPic = forms.ImageField(required = True, label = "",)
-        fields = UserCreationForm.Meta.fields + ('email', 'profPic')
-        print("form fields: ", fields)
+        #profPic = forms.ImageField(required = True, label = "",)
+        fields = UserCreationForm.Meta.fields + ('email',)
         
         def save(self, commit = False):
             instance = super(CustomUserCreationForm, self).save(commit=False) # create but don't save yet

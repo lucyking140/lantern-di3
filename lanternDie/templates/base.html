@@ -5,27 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content = "IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <link rel="icon" type="image/png" href="{% static 'LanternDie.png' %}">
+    <link rel="icon" type="image/ico" href="{% static 'favicon.ico' %}">
     <link rel = "stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css" >
     <link rel="stylesheet" href = "{% static 'mybulma1/css/mystyles.css' %}" >
     <title> Lantern Die! </title>
-    <!-- https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css -->
     <script src="https://kit.fontawesome.com/8c2330c86c.js" crossorigin="anonymous"></script>
 </head>
 <body>
+            <!-- building out the navbar at the top of the screen -- logo, links to dash, profile, and all profiles (if a user is 
+                logged out, only the "dashboard" link will show) -->
             <nav class="navbar is-expanded is-static-top has-background-primary" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
-                  <!-- <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-                  </a> -->
                   <a class = "navbar-item has-text-danger">
                         <img src = "{% static 'LanternDie.png' %}">
                   </a>
-             
-                  <!-- <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" >
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span> -->
                   </a>
                 </div>
                 <div class = "navbar-start">
@@ -61,6 +54,7 @@
         {% block content %} <!-- all other templates -->
         {% endblock content %}
 
+        <!-- navbar for posting a kill (fixed to the bottom of the screen)-->
         <nav class="navbar is-expanded is-fixed-bottom has-background-success" role="navigation" aria-label="main navigation">
             <div class = "navbar-end">
                 <a class="navbar-item" href="{% url 'lanternDie:postKill' %}">

@@ -1,13 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from django.db.models.signals import post_save
 
 class Profiles(models.Model):
     user = models.OneToOneField(User, default="01", on_delete=models.CASCADE, related_name="profile") #creating profiles
     follows = models.ManyToManyField("self", related_name="followed_by", symmetrical = False, blank = True)
     killCount = models.IntegerField(default = 0)
     profPic = models.ImageField(upload_to='profile_pics', default='fly.webp')
-    #profPicKey = models.CharField(default = 'fly', max_length = 500) #setting the s3 url for the specific file
     
     objects = models.Manager()
     
@@ -34,7 +32,6 @@ def create_profile(sender, instance, created, **kwargs):
     return profile
 post_save.connect(create_profile, sender=User) #whenever User implements .save(), this will also implement create_profile
 '''
-#look into decorators to make this part more streamlined
 
 class Kill(models.Model):
     user = models.ForeignKey(User, related_name = "kills", on_delete = models.DO_NOTHING)

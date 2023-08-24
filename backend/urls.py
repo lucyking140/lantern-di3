@@ -7,7 +7,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
-#router.register(r'lanternDie', views.ldView, 'lanternDie') #this line might need to be customized more
 
 urlpatterns = [
     path("admin/", admin.site.urls),

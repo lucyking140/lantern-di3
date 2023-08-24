@@ -32,8 +32,19 @@ def kill_view(request):
     return render(request, "kill.html", locals())
 
 def dashboard(request):
-    #form = KillForm() #always generates a blank form even if there is no submission
-    return render(request, "lanternDie/dashboard.html")
+    
+    #re-ordering all posts from all users that a profile follows:
+    
+    user = request.user  # Assuming you have authenticated users
+    followsPlus = user.profile.follows.all() + user #want to include the user's own posts on their dashboard
+    posts = []
+
+    for followed in followsPlus:
+        posts.extend(followed.user.kills.all())
+
+    ordered_posts = sorted(posts, key=lambda x: x.created_at, reverse=True)
+    
+    return render(request, "lanternDie/dashboard.html", {'ordered_posts': ordered_posts,})
     
 def profile_list(request):
     profiles = Profiles.objects.exclude(user=request.user)

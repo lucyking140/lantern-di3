@@ -15,10 +15,12 @@
     <div class = "column">
             
     </div>
-    <div class="columns"> <!-- posts -->
+    <div class="columns"> <!-- posts for all users  -->
         <div class = "column">
-            {% for followed in user.profile.follows.all %}
+            {% comment %} {% for followed in user.profile.follows.all %}
                 {% for kill in followed.user.kills.all %} <!-- each post -->
+            {% endcomment %}
+                {% for kill in ordered_posts %}
                     <div class="column has-shadow is-offset-one-quarter is-half has-background-success">
                         <div class = "column">
 
@@ -59,16 +61,7 @@
         </div>
     </div>
 
-   <!-- <footer class="footer has-text-centered is-flex-align-items-flex-end mt-auto has-background-success">
-        <div class="icon-text">
-            <span class="icon has-text-info">
-              <i class="fas fa-info-circle"></i>
-            </span>
-            <span>Add a Kill</span>
-          </div>
-    </footer> -->
-
-{% else %}
+{% else %} <!-- alternative dashboard for a nonuser -->
     <div class = "column">
 
     </div>

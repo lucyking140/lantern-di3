@@ -20,18 +20,7 @@ AWS_URL = os.environ.get('AWS_URL')
 AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'us-east-2'
 
-'''
-#local version --
-SECRET_KEY = 'Zkm+yoPuidlUq0wuoEKZhJ6lWN6+FDb4bMt/f734ZwM='
-AWS_ACCESS_KEY_ID = 'AKIASGSDA34MKKV76XXI'
-AWS_SECRET_ACCESS_KEY ='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'
-AWS_STORAGE_BUCKET_NAME = 'lanterndi3-heroku'
-AWS_URL = 'https://lanterndi3-heroku.s3.amazonaws.com/'
-AWS_DEFAULT_ACL = None
-AWS_S3_REGION_NAME = 'us-east-2'
-'''
-
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -95,19 +84,7 @@ DATABASES = {
         'PORT':  os.environ.get('DB_PORT')
     }
 }
-'''
-#local version:
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd3v7e3sb9psees',
-        'USER': 'dloedpbabkbqtk',
-        'PASSWORD': 'bf40188e9c2fcdf6a82aca3bbf6da256292dbc7944f9645568f37d448e2f2f25',
-        'HOST': 'ec2-52-21-61-131.compute-1.amazonaws.com',
-        'PORT':  '5432'
-    }
-}
-'''
+
 # Password validation
 
 AUTH_PASSWORD_VALIDATORS = [

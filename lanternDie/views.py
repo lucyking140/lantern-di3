@@ -36,13 +36,15 @@ def dashboard(request):
     #re-ordering all posts from all users that a profile follows:
     
     user = request.user  # Assuming you have authenticated users
-    followsPlus = user.profile.follows.all() + user #want to include the user's own posts on their dashboard
+    follows = user.profile.follows.all()
     posts = []
 
-    for followed in followsPlus:
+    for followed in follows:
         posts.extend(followed.user.kills.all())
+        
+    posts.extend(user.kills.all()) #including the user's own posts
 
-    ordered_posts = sorted(posts, key=lambda x: x.created_at, reverse=True)
+    ordered_posts = sorted(posts, key=lambda x: x.posted_time, reverse=True)
     
     return render(request, "lanternDie/dashboard.html", {'ordered_posts': ordered_posts,})
     

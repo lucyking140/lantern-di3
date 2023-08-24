@@ -115,7 +115,7 @@
                 <form method = "post"> 
                     {% csrf_token %} <!-- security token to allow users to safely submit forms -->
                     <div class="buttons has-addons">
-                        {% if profile.user in profile.user.follows.all %} <!-- greys out follow button if already following -->
+                        {% if profile in profile.follows.all %} <!-- greys out follow button if already following -->
                             <button class="button is-static is-static is-small">Follow</button>
                             <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
                         {% else %} 
@@ -133,7 +133,7 @@
 
         <div class="columns"> <!-- listing all of a user's posts -->
             <div class = "column">
-                {% for kill in profile.user.kills.all %}
+                {% for kill in ordered_kills %}
                     <div class="column has-shadow has-background-success has-shadow">
                         <div class = "block is-small has-text-black is-6">
                             {{ kill.caption }}
@@ -151,7 +151,7 @@
                 {% endfor %}
                 {% if profile.killCount == 0 %}
                     <span class = "is-small is-italic is-grey-dark">
-                        Sorry, no posts yet!
+                        Sorry, no kills yet!
                     </span>
                 {% endif %}
             </div>

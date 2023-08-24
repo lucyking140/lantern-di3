@@ -54,23 +54,31 @@ def profile_list(request):
     
 def profile(request, pk):
     profile = Profiles.objects.get(pk = pk) #get call to the database of users
-    #profPicUrl = f"https://lanterndi3-heroku.s3.amazonaws.com/ { profile.profPicKey }"
+    
+    current_user = request.user
+    current_prof = request.user.profile
+    
+    posts = current_user.kills.all()
+    
+    #making the list of the user's posts chronological
+    ordered_kills = sorted(posts, key=lambda x: x.posted_time, reverse=True)
+    
+    #following/unfollowing
     if request.method == "POST": #idea here is that a user (current user) is on a given profile's (profile) page when they request to follow them, so that form is submitted to the profile view
-        print("profile1: ", profile)
-        current_user = request.user.profile
         message = request.POST
         result = message.get("follow") #saying which key to get the message from
         print("result: ", result)
         if result == "follow":
-            current_user.follows.add(profile)
+            current_prof.follows.add(profile)
             print("unfollowing")
         elif result == "unfollow":
-            current_user.follows.remove(profile)
+            current_prof.follows.remove(profile)
             print("following")
-        current_user.save()
+        current_prof.save()
         print("successfully un/followed user")
+        
     
-    return render(request, "lanternDie/profile.html", {"profile": profile})
+    return render(request, "lanternDie/profile.html", {"profile": profile, "ordered_kills": ordered_kills})
     
 def postKill(request):
     form = KillForm(request.POST or None, request.FILES or None)

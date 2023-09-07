@@ -6,7 +6,6 @@ from django.views import generic
 from django.urls import reverse
 from .forms import KillForm, CustomUserCreationForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
 
 def registration(request):
     if request.method == "GET":
@@ -24,7 +23,6 @@ def registration(request):
            
         else:
             print(form.errors)
-        #return redirect(reverse("lanternDie:dashboard"))
     return render(request, 'registration/signup.html', {'form': form})
         
 

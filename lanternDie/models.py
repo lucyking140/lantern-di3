@@ -18,8 +18,7 @@ class Profiles(models.Model):
         
     def get_absolute_url(self):
         return self.profPic.url
-'''
-#replaced this with equiv method in signals.py
+
 #automatically creating a profile for a user when they join
 def create_profile(sender, instance, created, **kwargs):
 #(**kwargs catches the extra variables that post_save sends -- can make this better later
@@ -31,7 +30,7 @@ def create_profile(sender, instance, created, **kwargs):
     
     return profile
 post_save.connect(create_profile, sender=User) #whenever User implements .save(), this will also implement create_profile
-'''
+
 
 class Kill(models.Model):
     user = models.ForeignKey(User, related_name = "kills", on_delete = models.DO_NOTHING)

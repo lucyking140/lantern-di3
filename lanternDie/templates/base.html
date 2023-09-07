@@ -57,13 +57,15 @@
         <!-- navbar for posting a kill (fixed to the bottom of the screen)-->
         <nav class="navbar is-expanded is-fixed-bottom has-background-success" role="navigation" aria-label="main navigation">
             <div class = "navbar-end">
-                <a class="navbar-item" href="{% url 'lanternDie:postKill' %}">
-                    <div style="position:relative">  
-                        <button class="button is-transparent">
-                            <img src = "{% static 'fly.webp' %}">
-                        </button>
-                    </div>
-                </a>
+                {% if request.user.profile %} <!-- cannot post kill if not logged in -->
+                    <a class="navbar-item" href="{% url 'lanternDie:postKill' %}">
+                        <div style="position:relative">  
+                            <button class="button is-transparent">
+                                <img src = "{% static 'fly.webp' %}">
+                            </button>
+                        </div>
+                    </a>
+                {% endif %}
             </div>
         </nav>
 </body>

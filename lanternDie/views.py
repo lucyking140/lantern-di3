@@ -6,6 +6,7 @@ from django.views import generic
 from django.urls import reverse
 from .forms import KillForm, CustomUserCreationForm, UpdateUserForm, UpdateProfileForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 
 def registration(request):
     if request.method == "GET":
@@ -35,9 +36,9 @@ def dashboard(request):
     
     #re-ordering all posts from all users that a profile follows:
     
-    user = request.user  # Assuming you have authenticated users
+    user = request.user # Assuming you have authenticated users
     ordered_posts = []
-    if user:
+    if user.is_authenticated:
         follows = user.profile.follows.all()
         posts = []
 

@@ -22,12 +22,14 @@
                 <br>
                 (You are currently viewing all users' posts)
                 <br>
+                <br>
                 <a class="button is-light" href = "{% url 'login' %}">
                     Log In
                 </a>
                 <a class="button is-light" href = "{% url 'lanternDie:registration' %}">
                     Create Account
                 </a>
+                <br>
                 <br>
                 <a class="button is-success is-small" href = "{% url 'password_change' %}">
                     Forgot Password?
@@ -46,9 +48,12 @@
     {% endif %}
         
     <div class="columns"> <!-- posts for all users  -->
-        <div class = "column">
+        <div class = "column" align="center">
+                {% if not ordered_posts %} 
+                <p class="is-size-12 is-grey-dark is-italic" align="center"> Sorry, no posts yet! Check out the "all users" tab to follow more friends </p>
+                {% endif %}
                 {% for kill in ordered_posts %}
-                    <div class="column has-shadow is-offset-one-quarter is-half has-background-success">
+                    <div class="column has-shadow is-half has-background-success">
                         <div class = "column">
 
                         </div>
@@ -58,23 +63,21 @@
                                     <img class = "is-rounded" src = "{{ kill.user.profile.profPic.url }}">
                                 </figure>
                             </div>
-                            <div class = "content">
+                            <div class = "column is-1"> </div>
+                            <div class = "content" align="left">
                                 <h1 class = "is-size-4">
                                    {{ kill.user.username }}
                                 </h1>
-                                <p class="is-size-12 is-grey-dark">
+                                <p class="is-size-16 is-grey-dark">
                                     ({{ kill.posted_time }})
                                 </p>
                                 <p class="is-size-12 is-black">
                                     {{ kill.caption }}
                                 </p>
-                                <!-- <div class = "column is-fullwidth has-background-white"> -->
-                                <div class = "column"> <!-- want this to be the same width as the larger box so maybe take it out of a div? -->
-                                    <img class = "is-square" src = "{{ kill.image.url }}" width = '300' />
-                                </div>
-
-                                </div>
                             </div>
+                        </div>
+                        <div class = "column" align="center">
+                            <img class = "is-square" align = "center" src = "{{ kill.image.url }}" width = '600' />
                         </div>
                     </div> 
                     <div class = "column">

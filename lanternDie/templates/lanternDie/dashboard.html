@@ -2,24 +2,51 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-
-    {% load static %}
+{% load static %}
 
     <div class = "column is-mobile">
             
     </div>
     <h1 class = "title is-1 has-text-danger is-centered" align = "center"> Welcome To LanternDie! </h1>
-    <p class = "is-10 has-text-grey-dark is-italic" align = "center" > Ready to make a kill? </p>
-    <p class = "is-14 has-text-grey-dark is-italic" align = "center" >  Click the fly at the bottom of the page to help fight against invasive species </p>
-    <div class = "column">
-            
-    </div>
+
+    {% if not user.is_authenticated %}
+        <div class = "columns">
+            <div class = "column is-one-quarter">
+
+            </div>
+            <div class = "column is-half is-centered has-background-primary has-offset-one-quarter" align = "center">
+                <p class = "content is-size-4">You are not logged in.</p>
+                Log in or create an account to join your friends 
+                <br>
+                in the fight against invasive species!
+                <br>
+                (You are currently viewing all users' posts)
+                <br>
+                <a class="button is-light" href = "{% url 'login' %}">
+                    Log In
+                </a>
+                <a class="button is-light" href = "{% url 'lanternDie:registration' %}">
+                    Create Account
+                </a>
+                <br>
+                <a class="button is-success is-small" href = "{% url 'password_change' %}">
+                    Forgot Password?
+                </a>
+            </div>
+        </div>
+
+    {% else %}
+
+        <p class = "is-10 has-text-grey-dark is-italic" align = "center" > Ready to make a kill? </p>
+        <p class = "is-14 has-text-grey-dark is-italic" align = "center" >  Click the fly at the bottom of the page to help fight against invasive species </p>
+        <div class = "column">     
+
+        </div>
+
+    {% endif %}
+        
     <div class="columns"> <!-- posts for all users  -->
         <div class = "column">
-            {% comment %} {% for followed in user.profile.follows.all %}
-                {% for kill in followed.user.kills.all %} <!-- each post -->
-            {% endcomment %}
                 {% for kill in ordered_posts %}
                     <div class="column has-shadow is-offset-one-quarter is-half has-background-success">
                         <div class = "column">
@@ -35,19 +62,16 @@
                                 <h1 class = "is-size-4">
                                    {{ kill.user.username }}
                                 </h1>
-                                <p class="is-size-12">
+                                <p class="is-size-12 is-grey-dark">
                                     ({{ kill.posted_time }})
                                 </p>
-                                <div class = "column is-fullwidth has-background-white">
+                                <p class="is-size-12 is-black">
                                     {{ kill.caption }}
-                                    <div class = "column">
-                                        <img class = "is-square" src = "{{ kill.image.url }}" width = '300' />
-                                    </div>
-                                    <div class = "column">
-
-                                    </div>
+                                </p>
+                                <!-- <div class = "column is-fullwidth has-background-white"> -->
+                                <div class = "column"> <!-- want this to be the same width as the larger box so maybe take it out of a div? -->
+                                    <img class = "is-square" src = "{{ kill.image.url }}" width = '300' />
                                 </div>
-                                <div class = "column">
 
                                 </div>
                             </div>
@@ -60,7 +84,7 @@
         </div>
     </div>
 
-{% else %} <!-- alternative dashboard for a nonuser -->
+{% comment %} <!-- alternative dashboard for a nonuser
     <div class = "column">
 
     </div>
@@ -88,6 +112,7 @@
         </div>
     </div>
 
-{% endif %}
+{% endif %} -->
+{% endcomment %}
 
 {% endblock content %}

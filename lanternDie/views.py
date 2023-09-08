@@ -36,16 +36,20 @@ def dashboard(request):
     
     user = request.user # Assuming you have authenticated users
     ordered_posts = []
+    posts = []
+
     if user.is_authenticated:
         follows = user.profile.follows.all()
-        posts = []
 
         for followed in follows:
             posts.extend(followed.user.kills.all())
             
         posts.extend(user.kills.all()) #including the user's own posts
-
-        ordered_posts = sorted(posts, key=lambda x: x.posted_time, reverse=True)
+    else: #if not an account, just show all posts
+        for users in Profiles.objects.all():
+            posts.extend(users.user.kills.all())
+        
+    ordered_posts = sorted(posts, key=lambda x: x.posted_time, reverse=True)
     
     return render(request, "lanternDie/dashboard.html", {'ordered_posts': ordered_posts,})
     

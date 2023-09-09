@@ -20,10 +20,12 @@ def registration(request):
             user = form.save()
             login(request, user)
             print("saved user form")
+            return render(request, 'lanternDie/dashboard.html', {'form': form})
            
         else:
             print(form.errors)
-    return render(request, 'registration/signup.html', {'form': form})
+            return render(request, 'registration/signup.html', {'form': form})
+    
         
 
 def kill_view(request):
@@ -63,7 +65,12 @@ def profile(request, pk):
     current_user = request.user
     current_prof = request.user.profile
     
-    posts = current_user.kills.all()
+    all_profs = Profiles.objects.all()
+    all_users = []
+    for prof in all_profs:
+        all_users.append(prof.user)
+    
+    posts = profile.user.kills.all()
     
     #making the list of the user's posts chronological
     ordered_kills = sorted(posts, key=lambda x: x.posted_time, reverse=True)
@@ -83,7 +90,7 @@ def profile(request, pk):
         print("successfully un/followed user")
         
     
-    return render(request, "lanternDie/profile.html", {"profile": profile, "ordered_kills": ordered_kills})
+    return render(request, "lanternDie/profile.html", {"profile": profile, "ordered_kills": ordered_kills, "all_profs": all_profs})
     
 def postKill(request):
     form = KillForm(request.POST or None, request.FILES or None)

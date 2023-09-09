@@ -92,19 +92,18 @@
                 </button>
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                <div class="dropdown-content">
-                    {% for user1 in users %}                        
-                        {% if profile.user in user1.follows.all %} 
-                            <a href="{% url 'lanternDie:profile' user1.id %}" class="button is-transparent">
-                                {{ user1.username }}
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if not user1.follows.all %}
-                        <p> Oops! No one here yet.</p>
-                    {% endif %}
-                </div>
+                    <div class="dropdown-content">
+     
+                            {% for prof in all_profs %}                        
+                                <div class = "columns" align = "center">
+                                    {% if profile in prof.follows.all %} 
+                                        <a href="{% url 'lanternDie:profile' prof.id %}" class="button is-transparent">
+                                            {{ prof.user.username }}
+                                        </a>
+                                    {% endif %}
+                                </div>                                
+                            {% endfor %}
+                    </div>
                 </div>
             </div>
        </div>
@@ -115,7 +114,7 @@
                 <form method = "post"> 
                     {% csrf_token %} <!-- security token to allow users to safely submit forms -->
                     <div class="buttons has-addons">
-                        {% if profile in profile.follows.all %} <!-- greys out follow button if already following -->
+                        {% if profile in user.profile.follows.all %} <!-- greys out follow button if already following -->
                             <button class="button is-static is-static is-small">Follow</button>
                             <button class="button is-dark is-small" name="follow" value="unfollow">Unfollow</button>
                         {% else %} 

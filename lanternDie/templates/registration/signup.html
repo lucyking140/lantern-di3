@@ -14,14 +14,9 @@
     <div class = "column is-half is-centered has-background-success has-shadow">
         <h1 class="title is-2"> Sign Up </h1>
         <p class = "title is-6"> Welcome to LanternDie! </p>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %} 
-            {{ form.as_p }}
-            <input type = "submit" value = "Register">
-        </form>
         {% if form.errors %} <!-- displaying form errors -->
-            <div class="alert alert-danger alert-dismissible has-text-grey-dark is-italic" role="alert">
-                <div id="form_errors has-text-grey-dark is-italic is-">
+            <div class="alert alert-danger alert-dismissible has-text-danger is-italic" role="alert">
+                <div id="form_errors has-text-danger is-italic is-">
                     Sorry! 
                     {% for key, value in form.errors.items %}
                         {{ value }}
@@ -30,6 +25,11 @@
                 </div>
             </div>
         {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} 
+            {{ form.as_p }}
+            <input type = "submit" value = "Register">
+        </form>
     </div>
 </div>
 {% endblock %}

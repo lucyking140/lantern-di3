@@ -130,6 +130,47 @@
 
         </div>
 
+        <!--         
+        <div class="columns"> 
+            <div class = "column">
+                    {% if not ordered_kills %} 
+                    <p class="is-size-12 is-grey-dark is-italic" align="center"> Sorry, no posts yet! </p>
+                    {% endif %}
+                    {% for kill in ordered_kills %}
+                        <div class="column has-shadow is-half has-background-success">
+                            <div class = "column">
+    
+                            </div>
+                            <div class = "columns">
+                                <div class="media-left">
+                                    <figure class = "image is-48x48">
+                                        <img class = "is-rounded" src = "{{ kill.user.profile.profPic.url }}">
+                                    </figure>
+                                </div>
+                                <div class = "column is-1"> </div>
+                                <div class = "content" align="left">
+                                    <h1 class = "is-size-4">
+                                       {{ kill.user.username }}
+                                    </h1 class="is-size-16 is-grey-dark">
+                                        ({{ kill.posted_time }})
+                                    </p>
+                                    <p class="is-size-12 is-black">
+                                        {{ kill.caption }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class = "column" align="center">
+                                <img class = "is-square" align = "center" src = "{{ kill.image.url }}" width = '600' />
+                            </div>
+                        </div> 
+                        <div class = "column">
+                        
+                        </div>
+                    {% endfor %}
+            </div>
+        </div> -->
+        <!--          ---------------------------->
+
         <div class="columns"> <!-- listing all of a user's posts -->
             <div class = "column">
                 {% for kill in ordered_kills %}
@@ -140,8 +181,8 @@
                         <span class="is-8 has-text-grey-dark">
                             ({{ kill.posted_time }})
                         </span>
-                        <div class = "column is-offset-one-quarter">
-                            <img class = "box" src = "{{ kill.image.url }}" width = '600' />
+                        <div class = "column" align = "center">
+                            <img class = "is-square" align = "center" src = "{{ kill.image.url }}" width = '600' />
                         </div>
                     </div> 
                     <div class = "column">

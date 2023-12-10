@@ -3,3 +3,5 @@ Welcome to LanternDie! This project began as a collaborative hackathon project, 
 
 
 The site is implemented with Django along with a PostgreSQL database, which I deployed for viewing purposes via Heroku with media file storage on AWS S3. 
+
+### View the site [here](https://lantern-di3-0504b6bd8222.herokuapp.com/).

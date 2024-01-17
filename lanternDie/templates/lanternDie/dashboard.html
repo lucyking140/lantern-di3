@@ -72,7 +72,7 @@
                                     ({{ kill.posted_time }})
                                 </p>  
                                 <p class="is-size-20 is-grey-dark">
-                                    {{ kill.city }}, {{ kill.state }}
+                                    {{ kill.city }} {{ if kill.state }} , {{ kill.state }} {{ endif }}
                                 </p>
                                 <p class="is-size-12 is-black">
                                     {{ kill.caption }}

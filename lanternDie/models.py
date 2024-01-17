@@ -40,6 +40,17 @@ post_save.connect(create_profile, sender=User) #whenever User implements .save()
 
 
 class Kill(models.Model):
+
+    #getting the IP address used in the API call below
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+
     user = models.ForeignKey(User, related_name = "kills", on_delete = models.DO_NOTHING)
     image = models.ImageField(upload_to = 'kills', default = 'empty_post.jpg')
     caption = models.CharField(max_length=140)
@@ -52,32 +63,36 @@ class Kill(models.Model):
     url = 'https://www.googleapis.com/geolocation/v1/geolocate'
     params = {
         'key': api_key,
+        "considerIp": "true",
     }
     response = requests.post(url, params=params)
     geo_data = response.json()
-    lat = geo_data["location"]["lat"]
-    long = geo_data["location"]["lng"]
-
-    #then getting city from that info
-    url = 'https://maps.googleapis.com/maps/api/geocode/json'
-    params = {
-        'latlng': f'{lat},{long}',
-        'key': api_key,
-    }
-    response = requests.get(url, params=params)
-    addr_data = response.json()
-
-    #getting city and state
     city = ""
     state = ""
-    for component in addr_data["results"][0]["address_components"]:
-        if 'locality' in component['types']:
-            city = component['long_name']
-        elif 'administrative_area_level_1' in component['types']:
-            state = component['long_name']  
-        #have already covered both parts
-        if state and city:
-            break
+    if "location" in geo_data.keys():
+        lat = geo_data["location"]["lat"]
+        long = geo_data["location"]["lng"]
+
+        #then getting city from that info
+        url = 'https://maps.googleapis.com/maps/api/geocode/json'
+        params = {
+            'latlng': f'{lat},{long}',
+            'key': api_key,
+        }
+        response = requests.get(url, params=params)
+        addr_data = response.json()
+
+        #getting city and state
+        for component in addr_data["results"][0]["address_components"]:
+            if 'locality' in component['types']:
+                city = component['long_name']
+            elif 'administrative_area_level_1' in component['types']:
+                state = component['long_name']  
+            #have already covered both parts
+            if state and city:
+                break
+    else:
+        city = "Sorry, no location avaliable"
 
 
     def __str__(self): #changing the generic way that a post is displayed

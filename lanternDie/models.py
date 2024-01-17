@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+import os
+
+#for api calls:
+import requests
+from django.http import JsonResponse
 
 class Profiles(models.Model):
     user = models.OneToOneField(User, default="01", on_delete=models.CASCADE, related_name="profile") #creating profiles
@@ -39,10 +44,47 @@ class Kill(models.Model):
     image = models.ImageField(upload_to = 'kills', default = 'empty_post.jpg')
     caption = models.CharField(max_length=140)
     posted_time = models.DateTimeField(auto_now_add=True)
-    
+
+    #adding location for the kill, from the Google places API
+    api_key = os.environ.get('GMAPS_API_KEY')
+
+    #first getting long/lat
+    url = 'https://www.googleapis.com/geolocation/v1/geolocate'
+    params = {
+        'key': api_key,
+    }
+    response = requests.post(url, params=params)
+    geo_data = response.json()
+    lat = geo_data["location"]["lat"]
+    long = geo_data["location"]["lng"]
+
+    #then getting city from that info
+    url = 'https://maps.googleapis.com/maps/api/geocode/json'
+    params = {
+        'latlng': f'{lat},{long}',
+        'key': api_key,
+    }
+    response = requests.get(url, params=params)
+    addr_data = response.json()
+
+    #getting city and state
+    city = ""
+    state = ""
+    for component in addr_data["results"][0]["address_components"]:
+        if 'locality' in component['types']:
+            city = component['long_name']
+        elif 'administrative_area_level_1' in component['types']:
+            state = component['long_name']  
+        #have already covered both parts
+        if state and city:
+            break
+
+
     def __str__(self): #changing the generic way that a post is displayed
         return(
             f"{self.user}"
             f"({self.posted_time:%Y-%m-%d %H:%M}): "
             f"{self.caption[:15]}..."
+            f"{self.city}"
+            f"{self.state}"
         )

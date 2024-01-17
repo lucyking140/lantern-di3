@@ -30,6 +30,7 @@ def registration(request):
 
 def kill_view(request):
     post = get_object_or_404(models.Kill)
+
     return render(request, "kill.html", locals())
 
 def dashboard(request):

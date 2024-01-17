@@ -30,3 +30,5 @@ urllib3==1.26.16
 virtualenv==20.24.2
 virtualenv-clone==0.5.7
 whitenoise==6.5.0
+requests
+

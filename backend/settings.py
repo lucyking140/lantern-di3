@@ -20,6 +20,9 @@ AWS_URL = os.environ.get('AWS_URL')
 AWS_DEFAULT_ACL = None
 AWS_S3_REGION_NAME = 'us-east-2'
 
+#Google maps API key for Places API (shown on posts)
+GOOGLE_MAPS_API_KEY = os.environ.get('GMAPS_API_KEY')
+
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]

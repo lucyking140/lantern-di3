@@ -37,7 +37,7 @@ def dashboard(request):
     
     #re-ordering all posts from all users that a profile follows:
     
-    user = request.user # Assuming you have authenticated users
+    user = request.user
     ordered_posts = []
     posts = []
 

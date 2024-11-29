@@ -92,7 +92,7 @@ class Kill(models.Model):
             if state and city:
                 break
     else:
-        city = "Sorry, no location avaliable"
+        city = "Sorry, no location available"
 
 
     def __str__(self): #changing the generic way that a post is displayed
